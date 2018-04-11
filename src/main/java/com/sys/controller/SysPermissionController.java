@@ -23,7 +23,7 @@ public class SysPermissionController {
 	@Autowired
 	private SysPermissionService sysPermissionService;
 
-	@RequestMapping("/findAll")
+	@RequestMapping("/get")
 	public Object findAll(Model model, Pageable pageable) {
 		Sort sort = Sort.by(Order.desc("weight"));
 		if (pageable == null) {

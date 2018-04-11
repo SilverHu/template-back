@@ -15,7 +15,7 @@
 	<description>Spring公共配置 </description>
 
 	<!-- 因为在springmvc中加载了controller，在这里不进行加载 -->
-	<context:component-scan base-package="com.templete">
+	<context:component-scan base-package="com.sys">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 

@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sys.entity.SysRole;
@@ -20,7 +20,7 @@ public class SysRoleController {
 	@Autowired
 	private SysRoleService sysRoleService;
 
-	@RequestMapping("/findAll")
+	@RequestMapping("/get")
 	public Object findAll(Model model, Pageable pageable, String name) {
 		model.addAttribute("page", sysRoleService.findByNameLike(name, pageable));
 		return "sys/role/list";
@@ -46,7 +46,7 @@ public class SysRoleController {
 
 	@RequestMapping("/delete/{id}")
 	@ResponseBody
-	public Object deleteById(@RequestPart Long id) {
+	public Object deleteById(@PathVariable Long id) {
 		if (id == null) {
 			throw new SysBusinessException("id is null");
 		}

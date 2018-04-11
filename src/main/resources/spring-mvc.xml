@@ -8,7 +8,7 @@
 
 	<!-- 只注入controller，springMVC加载配置文件产生的是子容器 -->
 	<!-- 加载controller并未加载service，事物未失效，如果此时加载了service，事物无法对service进行拦截，故会失效 -->
-	<context:component-scan base-package="com.templete" use-default-filters="false">
+	<context:component-scan base-package="com.sys" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
