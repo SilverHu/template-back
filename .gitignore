@@ -1,0 +1,8 @@
+/target/
+/.classpath
+/.project
+/.settings/
+/data/
+/bin/
+/logs/
+src/test/java/com/test/util/
