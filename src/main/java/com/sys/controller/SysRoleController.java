@@ -15,7 +15,7 @@ import com.util.Constants;
 import com.util.Constants.Operation;
 
 @Controller
-@RequestMapping("/sys/role")
+@RequestMapping("sys/role")
 public class SysRoleController {
 	@Autowired
 	private SysRoleService sysRoleService;

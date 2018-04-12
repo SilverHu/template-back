@@ -12,6 +12,8 @@ public interface SysUserService {
 	public void deleteById(Long id);
 
 	public SysUser findById(Long id);
+	
+	public SysUser findByUsername(String username);
 
 	public Page<SysUser> findByUsernameLike(String username, Pageable pageable);
 }

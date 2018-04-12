@@ -37,5 +37,10 @@ public class SysUserServiceImpl implements SysUserService {
 	public Page<SysUser> findByUsernameLike(String username, Pageable pageable) {
 		return sysUserDao.findByUsernameLike(username, pageable);
 	}
+	
+	@Override
+	public SysUser findByUsername(String username){
+		return sysUserDao.findByUsername(username);
+	}
 
 }

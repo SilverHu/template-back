@@ -18,7 +18,7 @@ import com.util.Constants;
 import com.util.Constants.Operation;
 
 @Controller
-@RequestMapping("/sys/permission")
+@RequestMapping("sys/permission")
 public class SysPermissionController {
 	@Autowired
 	private SysPermissionService sysPermissionService;

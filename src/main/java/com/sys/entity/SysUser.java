@@ -25,8 +25,10 @@ public class SysUser {
 	@Id
 	@GeneratedValue
 	private Long id;// 用户id
+	@Column(unique = true, nullable = false)
 	private String username;// 用户名
 	private String name;// 用户姓名
+	@Column(nullable = false)
 	private String password;// 密码
 	private String email;// 用户邮箱
 	@Column(nullable = false)

@@ -15,7 +15,7 @@ import com.util.Constants;
 import com.util.Constants.Operation;
 
 @Controller
-@RequestMapping("/sys/user")
+@RequestMapping("sys/user")
 public class SysUserController {
 
 	@Autowired

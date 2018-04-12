@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-ok!
+	<ul>
+	<li>菜单1</li>
+	<li>菜单2</li>
+	<li>菜单3</li>
+	<li>菜单4</li>
+	</ul>
 </body>
 </html>
