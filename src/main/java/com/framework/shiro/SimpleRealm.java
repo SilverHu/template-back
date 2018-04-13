@@ -6,6 +6,8 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 简单Realm，安全数据源
@@ -14,16 +16,17 @@ import org.apache.shiro.subject.PrincipalCollection;
  *
  */
 public class SimpleRealm extends AuthorizingRealm {
-
+	private static Logger logger = LoggerFactory.getLogger(SimpleRealm.class);
+	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		// TODO Auto-generated method stub
+		logger.info("get get authorization ifno from principals");
 		return null;
 	}
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		// TODO Auto-generated method stub
+		logger.info("get get authorization ifno from token");
 		return null;
 	}
 
