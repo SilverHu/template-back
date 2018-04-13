@@ -18,6 +18,7 @@
 		<spring.data.jpa.version>2.0.6.RELEASE</spring.data.jpa.version>
 		<hibernate.version>5.2.16.Final</hibernate.version>
 		<spring.version>5.0.5.RELEASE</spring.version>
+		<shiro.version>1.4.0</shiro.version>
 		<httpclient.version>4.5</httpclient.version>
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.3</logback.version>
@@ -52,7 +53,7 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-		
+
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -71,11 +72,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-			<dependency>
-			    <groupId>javax.servlet.jsp</groupId>
-			    <artifactId>jsp-api</artifactId>
-			    <version>2.2</version>
-			</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2</version>
+		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -83,11 +84,11 @@
 		</dependency>
 		<!-- mysql驱动 -->
 		<dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <!-- connection pool -->
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<!-- connection pool -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-jdbc</artifactId>
@@ -95,11 +96,11 @@
 		</dependency>
 		<!-- spring data jpa -->
 		<dependency>
-	        <groupId>org.springframework.data</groupId>
-	        <artifactId>spring-data-jpa</artifactId>
-	        <version>${spring.data.jpa.version}</version>
-	    </dependency>
-	    <!-- Hibernate -->
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring.data.jpa.version}</version>
+		</dependency>
+		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -112,10 +113,10 @@
 		</dependency>
 		<!-- spring mvc -->
 		<dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-context</artifactId>
-	        <version>${spring.version}</version>
-	    </dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -137,6 +138,28 @@
 			<version>1.8.6</version>
 		</dependency>
 
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+
 		<!-- httpclient -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -151,9 +174,9 @@
 
 		<!-- fastjosn -->
 		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
-		    <version>1.2.47</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
 		</dependency>
 
 
@@ -163,7 +186,7 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.8.3</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -201,7 +224,7 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<!-- 资源过滤，让pom文件中的属性在其他资源文件中也可以引用 -->
 		<resources>

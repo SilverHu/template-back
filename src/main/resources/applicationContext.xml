@@ -15,10 +15,12 @@
 	<description>Spring公共配置 </description>
 
 	<!-- 因为在springmvc中加载了controller，在这里不进行加载 -->
-	<context:component-scan base-package="com.sys">
+	<context:component-scan base-package="com">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<import resource="classpath:/spring-shiro.xml"/>
+	
 	<!-- 数据库连接,tomcat jdbc连接池 -->
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 		destroy-method="close">
@@ -49,7 +51,7 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
 		</property>
 		<!-- 配置包扫描，扫描实体 -->
-		<property name="packagesToScan" value="com.sys.entity"/>
+		<property name="packagesToScan" value="com.**.entity"/>
 		<property name="jpaProperties">
 			<props>
 				<!-- 生成的数据表的列的映射策略 -->

@@ -31,7 +31,7 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping("/loginout")
+	@RequestMapping("/logout")
 	public Object loginout(HttpServletRequest request){
 		request.removeAttribute("sysUser");
 		return "login";
