@@ -30,7 +30,10 @@ CREATE TABLE `sys_user` (
   UNIQUE KEY `index_username` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
-
+-- ----------------------------
+-- Records of sys_user(admin 123456)
+-- ----------------------------
+INSERT INTO `sys_user` VALUES ('1', 'admin', '4280d89a5a03f812751f504cc10ee8a5', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`

@@ -5,10 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/signin.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="${ctx }/static/bootstrap/css/signin.css" />
 	<script src="${ctx }/static/jquery/js/jquery-3.3.1.min.js"></script>
 	<script src="${ctx }/static/bootstrap/js/bootstrap.min.js"></script>
 	
@@ -17,12 +17,14 @@
 <body>
 	<div class="container">
 		<form class="form-signin" action="${ctx }/login" method="post">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only" autofocus>Username</label>
-			<input class="form-control" name="username" placeholder="Username"/>
-			<label for="inputPassword" class="sr-only">Password</label>
-			<input class="form-control" name="password" type="password"  placeholder="Password"/>
-			
+			<h2 class="form-signin-heading">用户登录</h2>
+			<div style="color: red">
+	        	${error}
+	        </div>
+			<label for="inputEmail" class="sr-only" autofocus>用户名</label>
+			<input class="form-control" name="username" placeholder="用户名" required autofocus/>
+			<label for="inputPassword" class="sr-only">密码</label>
+			<input class="form-control" name="password" type="password"  placeholder="密码" required/>
 			<div class="checkbox">
 	          <label>
 	            <input type="checkbox" value="remember-me"> Remember me

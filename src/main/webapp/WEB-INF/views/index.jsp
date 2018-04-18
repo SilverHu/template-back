@@ -7,6 +7,6 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	afd
+	hello! ${shiroUser.username } <%=session.getAttribute("shiroUser") %>
 </body>
 </html>
