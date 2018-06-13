@@ -3,8 +3,30 @@
 <%@ include file="/WEB-INF/views/layout/taglib.jsp" %>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <!-- 给链接增加class="J_menuItem"后，链接跳转页面的target就是当前的iframe -->
-<iframe class="J_iframe" name="J_iframe" width="100%" height="100%" src="${ctx}/welcome" data-id="${ctx}/welcome" frameborder="0"  seamless>
-</iframe>
+<div class="content-wrapper" style="height: 100%">
+	<iframe id="J_iframe" class="J_iframe" name="J_iframe" width="100%" height="100%" src="${ctx}/welcome" data-id="${ctx}/welcome" frameborder="0" seamless></iframe>
+</div>
+<script>
+$(function(){
+	setIframeHeight(document.getElementById('J_iframe'));
+	window.onload = function () {
+		setIframeHeight(document.getElementById('J_iframe'));
+	};
+	window.onresize=function(){  
+		setIframeHeight(document.getElementById('J_iframe'));
+	} 
+});
+
+function setIframeHeight(iframe) {
+	if (iframe) {
+		var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+			if (iframeWin.document.body) {
+			iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+		}
+	}
+};
+
+</script>
  <!-- <aside class="right-side">
      <section class="content-header">
 		<h1>

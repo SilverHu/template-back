@@ -10,23 +10,32 @@
 	<link href="${ctx}/static/adminlte/css/AdminLTE.min.css" rel="stylesheet" />
 	<link href="${ctx}/static/adminlte/css/font-awesome.min.css" rel="stylesheet" />
 	<link href="${ctx}/static/adminlte/css/skins/skin-blue-light.min.css" rel="stylesheet">
+	<link href="${ctx}/static/consumer/css/content.css" rel="stylesheet">
 	
 	<script src="${ctx}/static/jquery/js/jquery-3.3.1.min.js"></script>
 	<script src="${ctx}/static/bootstrap/js/bootstrap.min.js?v=3.3.7"></script>
 	<script src="${ctx}/static/adminlte/js/adminlte.min.js"></script>
 	<script src="${ctx}/static/adminlte/js/jquery.slimscroll.min.js"></script>
-	
 </head>
-<body class="skin-blue-light">
-	<div style="background: transparent">
+<body class="">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Welcome!
+        <small><shiro:principal/></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="${ctx }/welcome"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Welcome</li>
       </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+    </section>
 </div>
 </body>
 </html>

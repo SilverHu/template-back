@@ -50,12 +50,12 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/")
 	public String success(Model model) {
+		model.addAttribute(Constants.MENUS, sysPermissionService.findByParentidIsNull());
 		return "index";
 	}
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome(Model model) {
-		model.addAttribute(Constants.MENUS, sysPermissionService.findByParentidIsNull());
 		return "welcome";
 	}
 }

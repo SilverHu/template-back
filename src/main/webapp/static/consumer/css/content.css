@@ -1,0 +1,6 @@
+.content-wrapper {
+	margin-left: 0px;
+}
+.content-header>.breadcrumb {
+    float: right;
+}

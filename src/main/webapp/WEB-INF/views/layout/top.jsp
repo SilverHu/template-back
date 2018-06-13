@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/layout/taglib.jsp" %>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <header class="main-header">
-    <a href="${ctx}/welcome" class="logo J_iframe">
+    <a href="${ctx}/welcome" class="logo" target="J_iframe">
     	<span class="logo-lg">后台管理系统</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">

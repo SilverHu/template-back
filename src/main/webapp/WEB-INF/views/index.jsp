@@ -25,9 +25,8 @@
 	<jsp:include page="/WEB-INF/views/layout/left.jsp"/>
 	
 	<!-- 正文 -->
-	<div class="content-wrapper">
-		<jsp:include page="/WEB-INF/views/layout/content.jsp"/>
-	</div>
+	
+	<jsp:include page="/WEB-INF/views/layout/content.jsp"/>
 	
 	<!-- 底部导航栏 -->
 	<jsp:include page="/WEB-INF/views/layout/foot.jsp"/>
