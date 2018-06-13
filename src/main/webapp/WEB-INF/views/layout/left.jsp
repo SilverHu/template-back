@@ -42,7 +42,7 @@
 	                </a>
 	                <ul class="treeview-menu">
 	                	<c:forEach var="submenu" items="${menu.subPermissions }">
-	                		<li><a href="${ctx }/${submenu.link }" class="J_iframe"><i class="fa fa-angle-double-right"></i> ${submenu.name }</a></li>
+	                		<li><a href="${ctx }/${submenu.link }" target="J_iframe"><i class="fa fa-angle-double-right"></i> ${submenu.name }</a></li>
 	                	</c:forEach>
 	                </ul>
 	            </li>
@@ -50,3 +50,13 @@
         </ul>
     </section>
 </aside>
+<script>
+	$(function(){
+		$('.treeview-menu').find('a').click(function () {
+			$('.treeview-menu').find('a').each(function(){
+				$(this).parent('li').removeClass('active').parent('ul').css("display","block").parent('li').removeClass('active');
+			});
+			$(this).parent('li').addClass('active').parent('ul').css("display","block").parent('li').addClass('active');
+		})
+	});
+</script>

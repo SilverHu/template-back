@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sys.entity.SysPermission;
 import com.sys.entity.SysRole;
 import com.sys.entity.SysUser;
-import com.sys.service.SysPermissionService;
 import com.sys.service.SysUserService;
 import com.util.Constants;
 
@@ -34,8 +33,6 @@ public class SimpleRealm extends AuthorizingRealm {
 
 	@Autowired
 	private SysUserService sysUserService;
-	@Autowired
-	private SysPermissionService sysPermissionService;
 	
 	/**
 	 * 为当前登录的Subject授予角色和权限
@@ -88,7 +85,6 @@ public class SimpleRealm extends AuthorizingRealm {
 		AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(sysUser.getUsername(), sysUser.getPassword(),
 				this.getName());
 		setSession(Constants.SHIRO_USER, sysUser);
-		setSession(Constants.MENUS, sysPermissionService.findByParentidIsNull());
 		return authcInfo;
 	}
 

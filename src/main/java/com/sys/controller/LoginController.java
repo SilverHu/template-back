@@ -5,13 +5,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sys.service.SysPermissionService;
+import com.util.Constants;
+
 @Controller
 public class LoginController {
-
+	@Autowired
+	private SysPermissionService sysPermissionService;
+	
 	@RequestMapping("/login")
 	public Object login(HttpServletRequest request) {
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
@@ -49,6 +55,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome(Model model) {
+		model.addAttribute(Constants.MENUS, sysPermissionService.findByParentidIsNull());
 		return "welcome";
 	}
 }

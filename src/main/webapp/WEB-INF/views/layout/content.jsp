@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/taglib.jsp" %>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
-<%-- <iframe id="main_frame"class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/welcome" data-id="${ctx}/welcome" frameborder="0"  seamless>
-	<!-- 给链接增加class="J_menuItem"后，链接跳转页面的target就是当前的iframe -->
-</iframe> --%>
- <aside class="right-side">
+<!-- 给链接增加class="J_menuItem"后，链接跳转页面的target就是当前的iframe -->
+<iframe class="J_iframe" name="J_iframe" width="100%" height="100%" src="${ctx}/welcome" data-id="${ctx}/welcome" frameborder="0"  seamless>
+</iframe>
+ <!-- <aside class="right-side">
      <section class="content-header">
 		<h1>
 			查看信息
@@ -74,3 +74,4 @@
         </div>
     </section>
 </aside>
+ -->

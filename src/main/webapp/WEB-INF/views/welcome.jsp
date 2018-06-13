@@ -16,35 +16,17 @@
 	<script src="${ctx}/static/adminlte/js/adminlte.min.js"></script>
 	<script src="${ctx}/static/adminlte/js/jquery.slimscroll.min.js"></script>
 	
-	<style type="text/css">
-	html,body{
-		height: 100%;
-	}
-	</style>
 </head>
 <body class="skin-blue-light">
-	<!-- Content Wrapper. Contains page content -->
-	    <!-- Content Header (Page header) -->
-	    <section class="content-header">
-	      <h1>
-	        Page Header
-	        <small>Optional description</small>
-	      </h1>
-	      <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-	        <li class="active">Here</li>
-	      </ol>
-	    </section>
-
-	    <!-- Main content -->
-	    <section class="content container-fluid">
-	
-	      <!--------------------------
-	        | Your Page Content Here |
-	        -------------------------->
-	
-	    </section>
-	    <!-- /.content -->
-  <!-- /.content-wrapper -->
+	<div style="background: transparent">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+</div>
 </body>
 </html>
