@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `id` bigint(20) NOT NULL,
   `username` varchar(255) NOT NULL COMMENT '用户名',
-  `password` varchar(255) NOT NULL DEFAULT NULL COMMENT '密码',
+  `password` varchar(255) NOT NULL COMMENT '密码',
   `name` varchar(255) DEFAULT NULL COMMENT '姓名',
   `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '保留字符 0-删除 1-存在',

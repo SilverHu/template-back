@@ -1,5 +1,6 @@
 package com.framework.shiro;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,8 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sys.entity.SysPermission;
 import com.sys.entity.SysRole;
 import com.sys.entity.SysUser;
+import com.sys.service.SysPermissionService;
 import com.sys.service.SysUserService;
 import com.util.Constants;
+
 
 /**
  * 简单Realm，安全数据源
@@ -31,7 +34,9 @@ public class SimpleRealm extends AuthorizingRealm {
 
 	@Autowired
 	private SysUserService sysUserService;
-
+	@Autowired
+	private SysPermissionService sysPermissionService;
+	
 	/**
 	 * 为当前登录的Subject授予角色和权限
 	 */
@@ -69,6 +74,9 @@ public class SimpleRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
+		if (StringUtils.isBlank(username)) {
+			throw new UnknownAccountException();
+		}
 		SysUser sysUser = sysUserService.findByUsername(username);
 		if (sysUser == null) {
 			throw new UnknownAccountException();
@@ -80,6 +88,7 @@ public class SimpleRealm extends AuthorizingRealm {
 		AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(sysUser.getUsername(), sysUser.getPassword(),
 				this.getName());
 		setSession(Constants.SHIRO_USER, sysUser);
+		setSession(Constants.MENUS, sysPermissionService.findByParentidIsNull());
 		return authcInfo;
 	}
 

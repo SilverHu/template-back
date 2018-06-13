@@ -6,3 +6,4 @@
 /bin/
 /logs/
 src/test/java/com/test/util/
+.tern-project

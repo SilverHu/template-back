@@ -1,5 +1,7 @@
 package com.sys.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +14,12 @@ public interface SysPermissionService {
 	public void deleteById(Long id);
 
 	public SysPermission findById(Long id);
+	
+	/**
+	 * 查询顶级菜单
+	 * @return
+	 */
+	public List<SysPermission> findByParentidIsNull();
 
 	public Page<SysPermission> findAll(Pageable pageable);
 }

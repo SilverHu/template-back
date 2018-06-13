@@ -289,7 +289,10 @@
 				<timeBetweenEvictionRunsMillis>900000</timeBetweenEvictionRunsMillis>
 				<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
 				<!-- 日志文件存放位置 -->
-				<logCatolog>logs/${project.artifactId}.log</logCatolog>
+				<logCatolog>D:/logs/${project.artifactId}.log</logCatolog>
+				<template_update_delay>1</template_update_delay>
+				<!-- jpa设置 -->
+				<showSql>true</showSql>
 			</properties>
 		</profile>
 	</profiles>

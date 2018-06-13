@@ -1,8 +1,12 @@
 package com.sys.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +23,8 @@ public class SysPermission {
 	private String description;// 资源描述
 	private Byte type;// 资源类型 1-菜单 2-按钮
 	private Integer weight; // 权重
+	@OneToMany(mappedBy="parentid", fetch = FetchType.EAGER)
+	private List<SysPermission> subPermissions; // 子菜单
 
 	public Long getId() {
 		return id;
@@ -90,6 +96,14 @@ public class SysPermission {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+
+	public List<SysPermission> getSubPermissions() {
+		return subPermissions;
+	}
+
+	public void setSubPermissions(List<SysPermission> subPermissions) {
+		this.subPermissions = subPermissions;
 	}
 
 }

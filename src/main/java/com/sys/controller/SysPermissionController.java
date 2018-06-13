@@ -1,10 +1,6 @@
 package com.sys.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,12 +20,8 @@ public class SysPermissionController {
 	private SysPermissionService sysPermissionService;
 
 	@RequestMapping("/get")
-	public Object findAll(Model model, Pageable pageable) {
-		Sort sort = Sort.by(Order.desc("weight"));
-		if (pageable == null) {
-			pageable = PageRequest.of(0, 20, sort);
-		}
-		model.addAttribute("page", sysPermissionService.findAll(pageable));
+	public Object findAll(Model model) {
+		model.addAttribute("list", sysPermissionService.findByParentidIsNull());
 		return "sys/permission/list";
 	}
 

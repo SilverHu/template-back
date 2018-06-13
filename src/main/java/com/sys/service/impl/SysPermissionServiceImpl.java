@@ -1,5 +1,8 @@
 package com.sys.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +36,19 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 		return sysPermissionDao.findById(id).get();
 	}
 
+	@Override
+	public List<SysPermission> findByParentidIsNull() {
+		Iterable<SysPermission> its = sysPermissionDao.findByParentidIsNullOrderByWeightDesc();
+		if (its != null) {
+			List<SysPermission> list = new ArrayList<>();
+			its.forEach((SysPermission permission)->{
+				list.add(permission);
+			});
+			return list;
+		}
+		return null;
+	}
+	
 	@Override
 	public Page<SysPermission> findAll(Pageable pageable) {
 		return sysPermissionDao.findAll(pageable);

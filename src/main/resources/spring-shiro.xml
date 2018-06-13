@@ -72,9 +72,9 @@
 	<!-- 安全管理器 -->  
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
 	    <property name="realm" ref="simpleRealm" />  
-	    <property name="sessionManager" ref="sessionManager"/>  
+	    <!-- <property name="sessionManager" ref="sessionManager"/>  --> 
 	    <property name="cacheManager" ref="cacheManager"/>  
-	    <property name="rememberMeManager" ref="rememberMeManager"/>
+	    <!-- <property name="rememberMeManager" ref="rememberMeManager"/> -->
 	</bean>
 	
 	<!-- shrio生命周期管理器 -->
@@ -92,7 +92,7 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/login" />
-		<property name="successUrl" value="/index" />
+		<property name="successUrl" value="/" />
 		<property name="unauthorizedUrl" value="/unauthorized" />
 		<property name="filters">
 			<map>
