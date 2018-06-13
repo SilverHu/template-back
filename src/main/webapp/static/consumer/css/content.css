@@ -1,6 +1,39 @@
-.content-wrapper {
-	margin-left: 0px;
+body{
+	background: none;
 }
-.content-header>.breadcrumb {
+.consumer-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
+.consumer-header>h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.consumer-header>.breadcrumb {
     float: right;
+    background: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 7px 5px;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border-radius: 2px;
+    float: right;
+}
+.consumer-header>.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    border-radius: 4px;
+}
+.consumer-header>ul, .consumer-header>ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.consumer-header>.breadcrumb>li>a {
+    color: #444;
+    text-decoration: none;
+    display: inline-block;
 }

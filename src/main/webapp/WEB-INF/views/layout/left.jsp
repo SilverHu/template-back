@@ -52,6 +52,7 @@
 </aside>
 <script>
 	$(function(){
+	    $('.sidebar-menu').tree()
 		$('.treeview-menu').find('a').click(function () {
 			$('.treeview-menu').find('a').each(function(){
 				$(this).parent('li').removeClass('active').parent('ul').css("display","block").parent('li').removeClass('active');
