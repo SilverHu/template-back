@@ -9,9 +9,15 @@ import com.sys.entity.SysPermission;
 public interface SysPermissionDao extends MyBaseRepository<SysPermission, Long> {
 	
 	/**
-	 * 查询顶级菜单
+	 * 查询顶级菜单（倒叙）
 	 * @return
 	 */
-	List<SysPermission> findByParentidIsNullOrderByWeightDesc();
-	
+	public List<SysPermission> findByParentidIsNullOrderByWeightDesc();
+
+	/**
+	 * 根据类型查询菜单
+	 * @param type
+	 * @return
+	 */
+	public List<SysPermission> findByType(Byte type);
 }

@@ -36,7 +36,7 @@
         	<c:forEach var="menu" items="${menus }" varStatus="i">
 				<li class="treeview">
 	                <a href="javascript:void(0)">
-	                    <i class="fa fa-edit"></i>
+	                    <i class="fa fa-list"></i>
 	                    <span>${menu.name }</span>
 	                    <i class="fa fa-angle-left pull-right"></i>
 	                </a>

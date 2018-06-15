@@ -1,6 +1,5 @@
 package com.sys.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +37,12 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 
 	@Override
 	public List<SysPermission> findByParentidIsNull() {
-		Iterable<SysPermission> its = sysPermissionDao.findByParentidIsNullOrderByWeightDesc();
-		if (its != null) {
-			List<SysPermission> list = new ArrayList<>();
-			its.forEach((SysPermission permission)->{
-				list.add(permission);
-			});
-			return list;
-		}
-		return null;
+		return sysPermissionDao.findByParentidIsNullOrderByWeightDesc();
+	}
+	
+	@Override
+	public List<SysPermission> findByType(Byte type) {
+		return sysPermissionDao.findByType(type);
 	}
 	
 	@Override

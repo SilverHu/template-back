@@ -22,6 +22,7 @@ public class SysPermissionController {
 	@RequestMapping("/get")
 	public Object findAll(Model model) {
 		model.addAttribute("list", sysPermissionService.findByParentidIsNull());
+		model.addAttribute("parentMenus", sysPermissionService.findByType((byte) 1)); // 查询菜单
 		return "sys/permission/list";
 	}
 

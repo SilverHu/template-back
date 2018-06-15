@@ -16,10 +16,17 @@ public interface SysPermissionService {
 	public SysPermission findById(Long id);
 	
 	/**
-	 * 查询顶级菜单
+	 * 查询顶级菜单（倒叙）
 	 * @return
 	 */
 	public List<SysPermission> findByParentidIsNull();
+	
+	/**
+	 * 根据类型查询菜单
+	 * @param type
+	 * @return
+	 */
+	public List<SysPermission> findByType(Byte type);
 
 	public Page<SysPermission> findAll(Pageable pageable);
 }

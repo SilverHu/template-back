@@ -15,7 +15,6 @@
 	<script src="${ctx}/static/bootstrap/js/bootstrap.min.js?v=3.3.7"></script>
 	<script src="${ctx}/static/adminlte/js/adminlte.min.js"></script>
 	<script src="${ctx}/static/adminlte/js/jquery.slimscroll.min.js"></script>
-	
 	<!-- icheck -->
 	<link href="${ctx}/static/adminlte/plugins/iCheck/square/blue.css" rel="stylesheet">
 	<script src="${ctx}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
