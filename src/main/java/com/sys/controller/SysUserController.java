@@ -12,7 +12,8 @@ import com.sys.entity.SysUser;
 import com.sys.exception.SysBusinessException;
 import com.sys.service.SysUserService;
 import com.util.Constants;
-import com.util.Constants.Operation;
+import com.util.ResponseResult;
+import com.util.ResponseResult.SaveOperation;
 
 @Controller
 @RequestMapping("sys/user")
@@ -30,9 +31,9 @@ public class SysUserController {
 	@RequestMapping("/save/go")
 	public Object gosave(Model model, Long id) {
 		if (id == null) {
-			model.addAttribute(Constants.OPERATION, Operation.ADD);
+			model.addAttribute(Constants.OPERATION, SaveOperation.ADD);
 		} else {
-			model.addAttribute(Constants.OPERATION, Operation.UPDATE);
+			model.addAttribute(Constants.OPERATION, SaveOperation.UPDATE);
 			model.addAttribute("entity", sysUserService.findById(id));
 		}
 		return "sys/user/input";
@@ -42,7 +43,7 @@ public class SysUserController {
 	@ResponseBody
 	public Object save(SysUser sysuser) {
 		sysUserService.save(sysuser);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -52,7 +53,7 @@ public class SysUserController {
 			throw new SysBusinessException("id is null");
 		}
 		sysUserService.deleteById(id);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 	
 }

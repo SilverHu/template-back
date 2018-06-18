@@ -20,4 +20,6 @@ public interface SysPermissionDao extends MyBaseRepository<SysPermission, Long> 
 	 * @return
 	 */
 	public List<SysPermission> findByType(Byte type);
+	
+	public SysPermission findByPermission(String permission);
 }

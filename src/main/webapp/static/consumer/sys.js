@@ -1,35 +1,33 @@
 /**
  * 
- * @param form_id form表单的id
- * @param request_url 请求的url
- * @param jump_url 请求成功之后跳转的url
+ * @param form form表单
+ * @param url 请求url
+ * @param jumpUrl 请求成功之后跳转的url
  */
-function ajaxSubmit(form,jump_url) {
-	$(form).find('[type=submit]').prop('disabled',true);
-	$(form).find('#errorwarning').find('.box-body').html();
-	$(form).find('#errorwarning').hide();
+function ajaxSubmit(formId,url,jumpUrl) {
+	//$(form).find('[type=submit]').prop('disabled',false);
+	$('#'+formId).find('.errorwarning').eq(0).find('.box-body').eq(0).html('');
+	$('#'+formId).find('.errorwarning').hide();
 	var options = {
 		dataType : "json",
-		url : $(form).attr('action'),
+		url : url,
 		success : function(data) {
-			if (data.code == "success") {
-				window.location.href = jump_url;
+			console.log(data);
+			if (data.code == "SUCCESS") {
+				window.location.href = jumpUrl;
 			} else {
-				var code = null;
-				if(data.code){
-					code = StatusCodeMsg.get(data.code);
-				}else{
-					code = data.msg;
-				}
+				$('#'+formId).find('.errorwarning').eq(0).find('.box-body').eq(0).html(data);
+				console.log($('#'+formId).find('.errorwarning').eq(0).find('.box-body').eq(0).html());
+				$('#'+formId).find('.errorwarning').show();
 			}
-			$(form).find('[type=submit]').prop('disabled',false);
+			$('#'+formId).find('[type=submit]').prop('disabled',true);
 		},
 		error : function(result) {
-			$(form).find('#errorwarning').find('.box-body').html(result);
-			$(form).find('#errorwarning').show();
-			$(form).find('[type=submit]').prop('disabled',false);
+			$('#'+formId).find('.errorwarning').find('.box-body').html(result);
+			$('#'+formId).find('.errorwarning').show();
+			$('#'+formId).find('[type=submit]').prop('disabled',true);
 		}
 	};
-	$(form).ajaxSubmit(options);
+	$('#'+formId).ajaxSubmit(options);
 }
 

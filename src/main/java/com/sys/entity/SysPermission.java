@@ -5,15 +5,17 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "sys_permission")
 public class SysPermission {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;// 资源id
 	private String name;// 资源名称
 	private Long parentid;// 父资源id
@@ -24,6 +26,7 @@ public class SysPermission {
 	private Byte type;// 资源类型 1-菜单 2-按钮
 	private Integer weight; // 权重
 	@OneToMany(mappedBy="parentid", fetch = FetchType.EAGER)
+	@OrderBy("weight desc")
 	private List<SysPermission> subPermissions; // 子菜单
 
 	public Long getId() {

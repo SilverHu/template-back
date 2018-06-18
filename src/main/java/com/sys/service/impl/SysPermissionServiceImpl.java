@@ -17,7 +17,7 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 
 	@Autowired
 	private SysPermissionDao sysPermissionDao;
-	
+
 	@Transactional
 	@Override
 	public void save(SysPermission entity) {
@@ -39,15 +39,26 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	public List<SysPermission> findByParentidIsNull() {
 		return sysPermissionDao.findByParentidIsNullOrderByWeightDesc();
 	}
-	
+
 	@Override
 	public List<SysPermission> findByType(Byte type) {
 		return sysPermissionDao.findByType(type);
 	}
-	
+
 	@Override
 	public Page<SysPermission> findAll(Pageable pageable) {
 		return sysPermissionDao.findAll(pageable);
+	}
+
+	@Override
+	public boolean isExists(Long id, String permission) {
+		SysPermission sysPermission = sysPermissionDao.findByPermission(permission);
+		if (sysPermission == null || sysPermission.getId() == null) {
+			return false;
+		} else if (sysPermission.getId().equals(id)) {
+			return false;
+		}
+		return true;
 	}
 
 }

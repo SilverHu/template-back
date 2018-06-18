@@ -12,7 +12,8 @@ import com.sys.entity.SysRole;
 import com.sys.exception.SysBusinessException;
 import com.sys.service.SysRoleService;
 import com.util.Constants;
-import com.util.Constants.Operation;
+import com.util.ResponseResult;
+import com.util.ResponseResult.SaveOperation;
 
 @Controller
 @RequestMapping("sys/role")
@@ -29,9 +30,9 @@ public class SysRoleController {
 	@RequestMapping("/save/go")
 	public Object gosave(Model model, Long id) {
 		if (id == null) {
-			model.addAttribute(Constants.OPERATION, Operation.ADD);
+			model.addAttribute(Constants.OPERATION, SaveOperation.ADD);
 		} else {
-			model.addAttribute(Constants.OPERATION, Operation.UPDATE);
+			model.addAttribute(Constants.OPERATION, SaveOperation.UPDATE);
 			model.addAttribute("entity", sysRoleService.findById(id));
 		}
 		return "sys/role/input";
@@ -41,7 +42,7 @@ public class SysRoleController {
 	@ResponseBody
 	public Object save(SysRole sysrole) {
 		sysRoleService.save(sysrole);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -51,6 +52,6 @@ public class SysRoleController {
 			throw new SysBusinessException("id is null");
 		}
 		sysRoleService.deleteById(id);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 }

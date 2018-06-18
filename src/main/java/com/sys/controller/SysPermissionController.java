@@ -1,5 +1,6 @@
 package com.sys.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sys.entity.SysPermission;
 import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
-import com.util.Constants;
-import com.util.Constants.Operation;
+import com.util.ResponseResult;
+import com.util.ResponseResult.ResponseCode;
 
 @Controller
 @RequestMapping("sys/permission")
@@ -26,22 +27,22 @@ public class SysPermissionController {
 		return "sys/permission/list";
 	}
 
-	@RequestMapping("/save/go")
-	public Object gosave(Model model, Long id) {
-		if (id == null) {
-			model.addAttribute(Constants.OPERATION, Operation.ADD);
-		} else {
-			model.addAttribute(Constants.OPERATION, Operation.UPDATE);
-			model.addAttribute("entity", sysPermissionService.findById(id));
-		}
-		return "sys/permission/input";
+	@RequestMapping("/get/{id}")
+	@ResponseBody
+	public Object gosave(Model model, @PathVariable Long id) {
+		return sysPermissionService.findById(id);
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
 	public Object save(SysPermission syspermission) {
+		if (StringUtils.isBlank(syspermission.getPermission())) {
+			return new ResponseResult(ResponseCode.ERROR_400, "权限字符不能为空");
+		} else if (sysPermissionService.isExists(syspermission.getId(), syspermission.getPermission())) {
+			return new ResponseResult(ResponseCode.ERROR_400, "权限字符不能为空");
+		}
 		sysPermissionService.save(syspermission);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 
 	@RequestMapping("/delete/{id}")
@@ -51,6 +52,6 @@ public class SysPermissionController {
 			throw new SysBusinessException("id is null");
 		}
 		sysPermissionService.deleteById(id);
-		return Constants.SUCCESS;
+		return ResponseResult.success;
 	}
 }
