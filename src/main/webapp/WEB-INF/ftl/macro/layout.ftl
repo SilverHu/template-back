@@ -127,3 +127,29 @@
 	  	<strong>templete © 2018-2019
 	</footer>
 </#macro>
+
+<#macro page url>
+	<div class="box-footer clearfix">
+		<ul class="pagination pagination-sm no-margin pull-right">
+			<li><a href="${url}">«</a></li>
+		    <li><a href="${url}">1</a></li>
+		    <li><a href="${url}">2</a></li>
+		    <li><a href="${url}">3</a></li>
+		    <li><a href="${url}">»</a></li>
+		</ul>
+	</div>
+</#macro>
+
+<#macro errorwarning>
+	<div class="box box-danger errorwarning" style="display:none;">
+        <div class="box-header with-border">
+          	<h3 class="box-title">ERROR</h3>
+          	<div class="box-tools pull-right">
+            	<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          	</div>
+        </div>
+        <div class="box-body">
+          	请检查是否已登录
+        </div>
+  	</div>
+</#macro>

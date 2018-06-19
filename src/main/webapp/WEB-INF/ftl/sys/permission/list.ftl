@@ -37,6 +37,10 @@
 		<h1>
 			权限列表
 		</h1>
+		<ol class="breadcrumb">
+	      <li><i class="fa fa-dashboard"></i> 系统设置</li>
+	      <li class="active">权限列表</li>
+	    </ol>
 	</div>
 	
 	<section class="content">
@@ -116,7 +120,7 @@
 	</section>
 	
 	<#-- 保存权限 -->
-	<div class="modal fade" id="savePermission">
+	<div class="modal fade" id="saveModal">
 		<div class="modal-dialog">
 			<div class="modal-header" style="background-color: #3c8dbc;">
              	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -124,7 +128,7 @@
                	</button>
              	<h4 class="modal-title" style="color: white"></h4>
            	</div>
-           	<form id="saveform" class="form-horizontal" action="" method="post">
+           	<form id="saveForm" class="form-horizontal" action="${ctx}/sys/permission/save" method="post">
         	<div class="modal-content">
               	<div class="modal-body">
               		<input type="hidden" name="id"/>
@@ -183,11 +187,11 @@
 	                    	<input type="text" name="weight" class="form-control" placeholder="权重">
 	                  	</div>
 	                </div>
-	                <@errorwarning/>
+	                <@layout.errorwarning/>
              	</div>
              	
              	<div class="modal-footer">
-	                <button type="button" id="submitButton" class="btn btn-primary">
+	                <button type="submit" id="submitButton" class="btn btn-primary">
 	                	编辑
 	                </button>
 				</div>
@@ -215,14 +219,6 @@
 			}
 		});
 		
-		$('[name=type]').select2({
-			placeholder: '请选择'
-		});
-		$('[name=parentid]').select2({
-			placeholder: '请选择',
-			allowClear: true
-		});
-		
 		<#-- 选择资源类型变化 -->
 		$('[name=type]').on('change',function(){
 			var type = $('[name=type]').val();
@@ -234,17 +230,33 @@
 			});
 		});
 		
-		$('#submitButton').on('click',function(){
-			ajaxSubmit('saveform','${ctx }/sys/permission/save', '${ctx}/sys/permission/get');
+		$('#saveForm').bootstrapValidator({
+		}).on('success.form.bv', function(e){
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('bootstrapValidator'); 
+            ajaxSubmit($form, '${ctx}/sys/permission/get');
+		});
+			
+		$('#saveModal').on('hidden.bs.modal', function() {
+			$('#saveForm')[0].reset();
+			$("#saveForm").data('bootstrapValidator').destroy();
+			$('#saveForm').data('bootstrapValidator', null);
+			$('#saveForm').bootstrapValidator({
+			}).on('success.form.bv', function(e){
+	            e.preventDefault();
+	            var $form = $(e.target);
+	            var bv = $form.data('bootstrapValidator'); 
+	            ajaxSubmit($form, '${ctx}/sys/permission/get');
+			});
 		});
 	});
 	
 	function gosave(id){
-		$('#saveform')[0].reset();
 		if (typeof(id) == undefined || isNaN(id)) {
 			$('.modal-title').html('<i class="fa fa-plus"></i> 新增权限');
 			$('.modal-footer button').html('新增');
-			$('#savePermission').modal('show');
+			$('#saveModal').modal('show');
 			resetSelect2();
 		} else {
 			$('.modal-title').html('<i class="fa fa-edit"></i> 编辑权限');
@@ -264,7 +276,7 @@
 					$('[name=weight]').val(data.weight);
 					changeParentIdSelect(data.type);
 					resetSelect2();
-					$('#savePermission').modal('show');
+					$('#saveModal').modal('show');
 				}
 			});
 		}
@@ -291,7 +303,7 @@
 			});
 		}
 	}
-
+	
 	function resetSelect2(){
 		$('[name=type]').select2({
 			placeholder: '请选择'

@@ -1,6 +1,7 @@
 package com.sys.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,15 @@ public class SysRoleController {
 	private SysRoleService sysRoleService;
 
 	@RequestMapping("/get")
-	public Object findAll(Model model, Pageable pageable, String name) {
-		model.addAttribute("page", sysRoleService.findByNameLike(name, pageable));
+	public Object findAll(Model model, Integer page, Integer size,SysRole sysRole) {
+		if (page == null) {
+			page = 0;
+		}
+		if (size == null) {
+			size = 10;
+		}
+		Pageable pageable = PageRequest.of(page, size);
+		model.addAttribute("page", sysRoleService.findByCondition(pageable, sysRole));
 		return "sys/role/list";
 	}
 

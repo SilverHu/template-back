@@ -13,5 +13,5 @@ public interface SysRoleService {
 
 	public SysRole findById(Long id);
 
-	public Page<SysRole> findByNameLike(String name, Pageable pageable);
+	public Page<SysRole> findByCondition(Pageable pageable, SysRole sysRole);
 }

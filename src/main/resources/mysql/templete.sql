@@ -1,3 +1,6 @@
+CREATE DATABASE `templete` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+USE templete;
+
 /*
 Navicat MySQL Data Transfer
 

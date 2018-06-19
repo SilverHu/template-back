@@ -53,11 +53,7 @@
 	</bean>
     
     <!-- 凭证匹配器 -->  
-	<bean id="credentialsMatcher" class="com.framework.shiro.CredentialsMatcher">  
-	    <property name="hashAlgorithmName" value="md5"/>  
-	    <property name="hashIterations" value="2"/>  
-	    <property name="storedCredentialsHexEncoded" value="true"/>  
-	</bean> 
+	<bean id="credentialsMatcher" class="com.framework.shiro.CredentialsMatcher" />  
 
     <!-- Realm实现，安全数据源 --> 
 	<bean id="simpleRealm" class="com.framework.shiro.SimpleRealm">
