@@ -23,7 +23,7 @@ public class SysRoleController {
 	private SysRoleService sysRoleService;
 
 	@RequestMapping("/get")
-	public Object findAll(Model model, Integer page, Integer size,SysRole sysRole) {
+	public Object findAll(Model model, Integer page, Integer size, SysRole sysRole) {
 		if (page == null) {
 			page = 0;
 		}
@@ -35,6 +35,11 @@ public class SysRoleController {
 		return "sys/role/list";
 	}
 
+	@ResponseBody
+	public Object getById(@PathVariable Long id) {
+		return sysRoleService.findById(id);
+	}
+	
 	@RequestMapping("/save/go")
 	public Object gosave(Model model, Long id) {
 		if (id == null) {

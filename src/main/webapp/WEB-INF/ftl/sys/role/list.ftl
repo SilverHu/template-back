@@ -59,8 +59,8 @@
 			                	<td>${entity.id}</td>
 			                  	<td>${entity.name}</td>
 			                  	<td>
-			                  		<a href="${ctx}/sys/role/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-w"></i></a>
-			                  		<a href="${ctx}/sys/role/delete/${entity.id}"><i class="fa fa-trash-o fa-w"></i></a>
+			                  		<a href="${ctx}/sys/role/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>
+			                  		<a onclick="remove(${entity.id})"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
 			                  	</td>
 			                </tr>
 		                	</#list>
@@ -71,7 +71,7 @@
 			</div>
 		</div>
 	</section>
-
+	
 	<script>
 	$(function(){
 		$('#contentTable').DataTable({
@@ -81,8 +81,13 @@
 	      	'ordering'    : false,
 	      	'info'        : true,
 	      	'autoWidth'   : false
-	    })
+	    });
+	    
 	});
+	
+	function remove(id){
+		ajaxDelete('${ctx}/sys/role/delete/'+id, '确认删除ID为 '+id+' 的角色吗？');
+	}
 	</script>
 </body>
 </html>

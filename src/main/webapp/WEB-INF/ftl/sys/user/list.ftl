@@ -92,8 +92,8 @@
 			                  		</#list>
 			                  	</td>
 			                  	<td>
-			                  		<a href="${ctx}/sys/user/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-w"></i></a>
-			                  		<a href="${ctx}/sys/user/delete/${entity.id}"><i class="fa fa-trash-o fa-w"></i></a>
+			                  		<a href="${ctx}/sys/user/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>
+			                  		<a onclick="remove(${entity.id})"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
 			                  	</td>
 			                </tr>
 		                	</#list>
@@ -121,6 +121,10 @@
 	      	'autoWidth'   : false
 	    })
 	});
+	
+	function remove(id){
+		ajaxDelete('${ctx}/sys/user/delete/'+id, '确认删除ID为 '+id+' 的用户吗？');
+	}
 	</script>
 </body>
 </html>

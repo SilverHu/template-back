@@ -1,6 +1,7 @@
 <#macro bootstrap ctx>
 	<link href="${ctx}/static/bootstrap/css/bootstrap.css?v=3.3.7" rel="stylesheet" />
 	<script src="${ctx}/static/jquery/js/jquery-3.3.1.min.js"></script>
+	<script src="${ctx}/static/jquery/js/json2.js"></script>
 	<script src="${ctx}/static/bootstrap/js/bootstrap.min.js?v=3.3.7"></script>
 </#macro>
 
@@ -46,6 +47,12 @@
 	<script src="${ctx}/static/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
 </#macro>
 
+<#-- layer弹框样式 -->
+<#macro layer ctx>
+	<link href="${ctx}/static/layer/theme/default/layer.css" rel="stylesheet">
+	<script src="${ctx}/static/layer/layer.js"></script>
+</#macro>
+
 <#-- 首页样式 -->
 <#macro index ctx>
 	<@style.bootstrap ctx=ctx/>
@@ -58,6 +65,7 @@
 	<@style.select2 ctx=ctx/>
 	<@style.icheck ctx=ctx/>
 	<@style.DataTables ctx=ctx/>
+	<@style.layer ctx=ctx/>
 	<@style.adminlte ctx=ctx/>
 	<@style.validator ctx=ctx/>
 	<#-- 自定义 -->
