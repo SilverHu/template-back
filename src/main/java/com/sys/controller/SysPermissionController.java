@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sys.entity.SysPermission;
 import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
@@ -33,7 +34,7 @@ public class SysPermissionController {
 	public Object getById(Model model, @PathVariable Long id) {
 		return sysPermissionService.findById(id);
 	}
-	
+
 	@RequestMapping("/save/go")
 	public Object gosave(Model model, Long id) {
 		model.addAttribute("parentMenus", sysPermissionService.findByType((byte) 1)); // 查询菜单
@@ -57,7 +58,21 @@ public class SysPermissionController {
 		sysPermissionService.save(syspermission);
 		return ResponseResult.success;
 	}
-	
+
+	/**
+	 * 判断权限自负是否已存在
+	 * 
+	 * @param syspermission
+	 * @return
+	 */
+	@RequestMapping("/save/validator")
+	@ResponseBody
+	public Object isValidator(Long id, String permission) {
+		JSONObject resp = new JSONObject();
+		resp.put("valid", !sysPermissionService.isExists(id, permission));
+		return resp;
+	}
+
 	@RequestMapping("/delete/{id}")
 	@ResponseBody
 	public Object deleteById(@PathVariable Long id) {

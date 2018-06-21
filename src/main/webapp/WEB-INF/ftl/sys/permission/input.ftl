@@ -135,7 +135,22 @@
 		
 		<#-- bootstrap validator验证 -->
 		$('#saveForm').bootstrapValidator({
-			excluded : [':disabled']
+			excluded : [':disabled'],
+			fields: {
+				permission: {
+					trigger: 'blur',
+					validators:{
+						remote: {
+							url: '${ctx}/sys/permission/save/validator',
+							data:{
+								id: function(){return $('input[name=id]').val();},
+								permission: function(){return $('input[name=permission]').val()}
+							},
+							message: '该权限标识已存在'
+						}
+					}
+				}
+			}
 		}).on('success.form.bv', function(e){
 	        e.preventDefault();
 	        var $form = $(e.target);

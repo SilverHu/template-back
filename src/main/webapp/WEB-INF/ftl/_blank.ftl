@@ -28,6 +28,7 @@
             		</div>
             		<div class="box-body">
             			填充正文
+            			<@layout.errorwarning/>
             		</div>
             		<div class="box-footer">
             			填充尾部内容
