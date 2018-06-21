@@ -48,6 +48,7 @@
 		                    	<input type="text" name="name" value="${entity.name}" class="form-control" placeholder="角色名称（必填）" required tel>
 		                  	</div>
 		                </div>
+		                <@layout.errorwarning/>
             		</div>
             		<div class="box-footer" style="text-align:center">
             			<a href="javascript:history.go(-1)" class="btn btn-default">

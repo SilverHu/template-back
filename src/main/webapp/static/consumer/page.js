@@ -19,7 +19,6 @@
 					data : opts.form.serialize(),
 					dataType : 'json',
 					success : function(result) { // 封装返回数据，这里仅演示了修改属性名
-						console.log(data);
 						var returnData = {};
 						//returnData.draw = result.draw;// 请求次数计数器，每次发送给服务器后原封返回，为了确保每次请求都能对应到服务器返回到的数据
 						returnData.recordsTotal = result.totalElements;

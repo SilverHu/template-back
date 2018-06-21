@@ -112,7 +112,7 @@
 				{
 					data: 'id',
 					render: function(data, type, row, meta) {
-						return '<a href="${ctx}/sys/user/save/go?id="' + data +' style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>' +
+						return '<a href="${ctx}/sys/user/save/go?id=' + data +'" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>' +
 	              		'<a href="javascript:void" onclick="remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>' +
 	              		'<a href="${ctx}/sys/user/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>';
 	                }
