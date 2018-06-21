@@ -1,10 +1,10 @@
 package com.sys.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 @NoRepositoryBean
-public interface MyBaseRepository<T, ID> extends PagingAndSortingRepository<T, ID>, JpaSpecificationExecutor<T> {
+public interface MyBaseRepository<T, ID> extends JpaRepository<T, ID>, JpaSpecificationExecutor<T> {
 
 }

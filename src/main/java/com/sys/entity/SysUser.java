@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 系统用户
  * 
@@ -38,12 +40,12 @@ public class SysUser {
 	@JoinTable(name = "sys_relation_user_role", joinColumns = {
 			@JoinColumn(name = "userid", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "roleid", referencedColumnName = "id") })
-	private Set<SysRole> roleList; // 角色列表
+	private Set<SysRole> roles; // 角色列表
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "sys_relation_user_permission", joinColumns = {
 			@JoinColumn(name = "userid", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "permissionid", referencedColumnName = "id") })
-	private Set<SysPermission> permissionList; // 权限列表
+	private Set<SysPermission> permissions; // 权限列表
 
 	public Long getId() {
 		return id;
@@ -93,20 +95,24 @@ public class SysUser {
 		this.status = status;
 	}
 
-	public Set<SysRole> getRoleList() {
-		return roleList;
+	public Set<SysRole> getRoles() {
+		return roles;
 	}
 
-	public void setRoleList(Set<SysRole> roleList) {
-		this.roleList = roleList;
+	public void setRoles(Set<SysRole> roles) {
+		this.roles = roles;
 	}
 
-	public Set<SysPermission> getPermissionList() {
-		return permissionList;
+	public Set<SysPermission> getPermissions() {
+		return permissions;
 	}
 
-	public void setPermissionList(Set<SysPermission> permissionList) {
-		this.permissionList = permissionList;
+	public void setPermissions(Set<SysPermission> permissions) {
+		this.permissions = permissions;
 	}
 
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
+	}
 }

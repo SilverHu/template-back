@@ -53,6 +53,12 @@
 	<script src="${ctx}/static/layer/layer.js"></script>
 </#macro>
 
+<#-- jstree弹框样式 -->
+<#macro jstree ctx>
+	<link href="${ctx}/static/jstree/themes/default/style.min.css" rel="stylesheet">
+	<script src="${ctx}/static/jstree/jstree.min.js"></script>
+</#macro>
+
 <#-- 首页样式 -->
 <#macro index ctx>
 	<@style.bootstrap ctx=ctx/>

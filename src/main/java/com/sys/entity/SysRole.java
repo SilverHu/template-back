@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.JSON;
+
 @Entity
 @Table(name = "sys_role")
 public class SysRole {
@@ -26,7 +28,7 @@ public class SysRole {
 	@JoinTable(name = "sys_relation_role_permission", joinColumns = {
 			@JoinColumn(name = "roleid", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "permissionid", referencedColumnName = "id") })
-	private Set<SysPermission> permissionList; // 权限列表
+	private Set<SysPermission> permissions; // 权限集合
 
 	public Long getId() {
 		return id;
@@ -44,12 +46,16 @@ public class SysRole {
 		this.name = name;
 	}
 
-	public Set<SysPermission> getPermissionList() {
-		return permissionList;
+	public Set<SysPermission> getPermissions() {
+		return permissions;
 	}
 
-	public void setPermissionList(Set<SysPermission> permissionList) {
-		this.permissionList = permissionList;
+	public void setPermissions(Set<SysPermission> permissions) {
+		this.permissions = permissions;
 	}
 
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
+	}
 }

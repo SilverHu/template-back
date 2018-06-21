@@ -33,8 +33,8 @@
 			                            <div class="form-group">
 			                                <select name="status" class="form-control" style="width:100%;">
 			                                	<option></option>
-			                                	<option value="1" <#if sysUser.status == 1 >selected="selected"</#if>>正常</option>
-			                                	<option value="0" <#if sysUser.status == 0 >selected="selected"</#if>>禁用</option>
+			                                	<option value="1" <#if sysUser.status?string("true","false") == "true" >selected="selected"</#if>>启用</option>
+			                                	<option value="0" <#if sysUser.status?string("true","false") == "false" >selected="selected"</#if>>禁用</option>
 			                                </select>
 			                            </div>
 			                            <#-- 
@@ -93,7 +93,8 @@
 			                  	</td>
 			                  	<td>
 			                  		<a href="${ctx}/sys/user/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>
-			                  		<a onclick="remove(${entity.id})"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
+			                  		<a href="javascript:void" onclick="remove(${entity.id})" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
+			                  		<a href="${ctx}/sys/user/permission/go/${entity.id}" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>
 			                  	</td>
 			                </tr>
 		                	</#list>

@@ -9,6 +9,12 @@ public interface SysUserService {
 
 	public void save(SysUser entity);
 
+	/**
+	 * 授权
+	 * @param entity
+	 */
+	public void grantPermissions(SysUser entity);
+
 	public void deleteById(Long id);
 
 	public SysUser findById(Long id);

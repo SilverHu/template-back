@@ -20,7 +20,7 @@ function ajaxSubmit($form, jumpUrl){
 			}
 		},
 		error: function(){
-			$form.find('.errorwarning').find('.box-body').html('请检查是否已登录');
+			$form.find('.errorwarning').find('.box-body').html('请检查是否已登录/已登录用户请联系管理员');
 			$form.find('.errorwarning').show();
 		}
 	});

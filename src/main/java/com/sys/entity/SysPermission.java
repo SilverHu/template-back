@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.alibaba.fastjson.JSON;
+
 @Entity
 @Table(name = "sys_permission")
 public class SysPermission {
@@ -25,7 +27,7 @@ public class SysPermission {
 	private String description;// 资源描述
 	private Byte type;// 资源类型 1-菜单 2-按钮
 	private Integer weight; // 权重
-	@OneToMany(mappedBy="parentid", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "parentid", fetch = FetchType.EAGER)
 	@OrderBy("weight desc")
 	private List<SysPermission> subPermissions; // 子菜单
 
@@ -109,4 +111,8 @@ public class SysPermission {
 		this.subPermissions = subPermissions;
 	}
 
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
+	}
 }

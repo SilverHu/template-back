@@ -50,12 +50,12 @@ public class TestSysUserDao extends TestBase {
 		sysUser.setStatus(true);
 		Set<SysPermission> permissionList = new HashSet<>();
 		permissionList.add(permission);
-		sysUser.setPermissionList(permissionList);
+		sysUser.setPermissions(permissionList);
 		sysUserDao.save(sysUser);
 
 		permission.setName("permission1");
 		permissionList.add(permission);
-		sysUser.setPermissionList(permissionList);
+		sysUser.setPermissions(permissionList);
 		sysUserDao.save(sysUser);
 
 		Optional<SysUser> optional = sysUserDao.findById(sysUser.getId());

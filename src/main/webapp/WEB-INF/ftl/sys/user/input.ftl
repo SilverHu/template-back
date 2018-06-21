@@ -28,7 +28,7 @@
 	    </ol>
 	</div>
 	
-	 <!-- Main content -->
+	<!-- Main content -->
     <section class="content">
       	<div class="row">
         	<div class="col-xs-12">
@@ -57,7 +57,7 @@
 		                <div class="form-group">
 		                  	<label for="password" class="col-sm-2 control-label">密码</label>
 		                  	<div class="col-sm-8">
-		                    	<input type="password" name="password" value="${entity.password}" class="form-control" placeholder="Password（必填）">
+		                    	<input type="password" name="password" value="" class="form-control" placeholder="Password（必填），编辑时不填写则为不修改">
 		                  	</div>
 		                </div>
 		                <div class="form-group">

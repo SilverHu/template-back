@@ -36,7 +36,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user(admin 123456)
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '4280d89a5a03f812751f504cc10ee8a5', null, null, '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '2984d81aa698559ffe298c676fb6b3f4', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `sys_role`

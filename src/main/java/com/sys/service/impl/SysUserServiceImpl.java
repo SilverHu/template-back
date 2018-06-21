@@ -36,6 +36,17 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Transactional
 	@Override
+	public void grantPermissions(SysUser entity) {
+		if (entity == null || entity.getId() == null) {
+			return;
+		}
+		// 删除原有权限
+
+		// 批量新增权限
+	}
+
+	@Transactional
+	@Override
 	public void deleteById(Long id) {
 		sysUserDao.deleteById(id);
 	}
@@ -62,6 +73,9 @@ public class SysUserServiceImpl implements SysUserService {
 					// 根据用户名查询
 					if (StringUtils.isNotBlank(sysUser.getUsername())) {
 						list.add(cb.like(root.get("username").as(String.class), "%" + sysUser.getUsername() + "%"));
+					}
+					if (sysUser.getStatus() != null) {
+						list.add(cb.equal(root.get("status").as(Boolean.class), sysUser.getStatus()));
 					}
 				}
 				Predicate[] p = new Predicate[list.size()];

@@ -4,6 +4,7 @@ package com.sys.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class LoginController {
 			error = "用户名/密码错误";
 		} else if (IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
 			error = "用户名/密码错误";
+		} else if (LockedAccountException.class.getName().equals(exceptionClassName)) {
+			error = "账号锁定";
 		} else if (exceptionClassName != null) {
 			error = "其他错误";
 		}

@@ -46,16 +46,16 @@ public class SimpleRealm extends AuthorizingRealm {
 		}
 		// 获取用户的权限和角色列表
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		if (sysUser.getPermissionList() != null) {
-			for (SysPermission permission : sysUser.getPermissionList()) {
+		if (sysUser.getPermissions() != null) {
+			for (SysPermission permission : sysUser.getPermissions()) {
 				info.addStringPermission(permission.getPermission());
 			}
 		}
-		if (sysUser.getRoleList() != null) {
-			for (SysRole sysRole : sysUser.getRoleList()) {
+		if (sysUser.getRoles() != null) {
+			for (SysRole sysRole : sysUser.getRoles()) {
 				info.addRole(sysRole.getName());
-				if (sysRole.getPermissionList() != null) {
-					for (SysPermission permission : sysRole.getPermissionList()) {
+				if (sysRole.getPermissions() != null) {
+					for (SysPermission permission : sysRole.getPermissions()) {
 						info.addStringPermission(permission.getPermission());
 					}
 				}

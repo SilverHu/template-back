@@ -57,7 +57,7 @@ public class SysPermissionController {
 		sysPermissionService.save(syspermission);
 		return ResponseResult.success;
 	}
-
+	
 	@RequestMapping("/delete/{id}")
 	@ResponseBody
 	public Object deleteById(@PathVariable Long id) {

@@ -60,7 +60,8 @@
 			                  	<td>${entity.name}</td>
 			                  	<td>
 			                  		<a href="${ctx}/sys/role/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>
-			                  		<a onclick="remove(${entity.id})"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
+			                  		<a href="javascript:void" onclick="remove(${entity.id})" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
+			                  		<a href="${ctx}/sys/role/permission/go/${entity.id}" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>
 			                  	</td>
 			                </tr>
 		                	</#list>

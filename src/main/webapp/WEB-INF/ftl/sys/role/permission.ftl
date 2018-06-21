@@ -3,9 +3,11 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>权限列表</title>
+	<title>角色授权</title>
 	<@style.common ctx=ctx/>
 	<@style.jstree ctx=ctx/>
+	<#-- jstree -->
+	
 	<style type="text/css">
 	.close {
 	    float: right;
@@ -33,36 +35,40 @@
 
 	<div class="consumer-header">
 		<h1>
-			资源列表
+			角色授权
 		</h1>
 		<ol class="breadcrumb">
 	      <li><i class="fa fa-dashboard"></i> 系统设置</li>
-	      <li>权限管理</li>
-	      <li class="active">资源列表</li>
+	      <li><a href="${ctx}/sys/role/get">角色管理</a></li>
+	      <li class="active">角色授权</li>
 	    </ol>
 	</div>
 	
+	<form id="saveForm" class="form-horizontal" action="${ctx}/sys/role/permission" method="post">
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="box">
-		            <div class="box-header with-border" style="text-align:right">
-		            	<a class="btn btn-primary" onclick="gosave()">
-		            		<i class="fa fa-plus"></i> 新增资源
-		            	</a>
-		            </div>
-        
 		            <#-- table start -->
 		            <div class="box-body">
+		            	<input type="hidden" name="id" value="${entity.id}"/>
+            			<input type="hidden" name="permissions"/>
+            			
+            			<table width="100%" class="table" style="border:0px">
+        					<tr>
+        						<th>请确认授权角色信息</th>
+        					</tr>
+            				<tr>
+            					<td>角色名：${entity.name}</td>
+            				</tr>
+            			</table>
 		            	<#-- 顶级菜单 -->
-		            	<div id="jstree">
+		            	<div id="jstree" style="padding-top:20px;">
 		            	<ul>
-		            		<#list list as menu>
-							<li class="jstree-open">
+		            		<#list permissions as menu>
+							<li id="${menu.id}" class="jstree-open">
 				                <span>
-				                	${menu.name } 
-				                	<a onclick="gosave(${menu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
-				                	<a onclick="remove(${menu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
+				                	${menu.name }
 				                	<#if menu.type == 1>
 		                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 		                			<#elseif menu.type == 2>
@@ -73,11 +79,16 @@
 				                <#if menu.subPermissions??>
 				                <ul>
 				                	<#list menu.subPermissions as submenu>
-			                		<li class="jstree-open">
+			                		<li class="jstree-open" id="${submenu.id}" 
+			                			<#list entity.permissions as has>
+			                				<#if has.id==submenu.id>
+			                					<#if has.subPermissions??>data-jstree='{"opened":true,"selected":true}'
+			                					<#else>class="jstree-undetermined"
+			                					</#if>
+			                				</#if>
+			                			</#list>>
 			                			<span>
 			                				${submenu.name } 
-				                			<a onclick="gosave(${submenu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
-				                			<a onclick="remove(${submenu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
 				                			<#if submenu.type == 1>
 				                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 				                			<#elseif submenu.type == 2>
@@ -88,11 +99,9 @@
 			                			<#if submenu.subPermissions??>
 						                <ul>
 				                			<#list submenu.subPermissions as buttonmenu>
-					                		<li class="jstree-open">
+					                		<li class="jstree-open jstree-selected" id="${buttonmenu.id}" <#list entity.permissions as has><#if has.id==buttonmenu.id>data-jstree='{"opened":true,"selected":true}'</#if></#list>>
 					                			<span>
 					                				${buttonmenu.name } 
-						                			<a onclick="gosave(${buttonmenu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
-						                			<a onclick="remove(${buttonmenu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
 						                			<#if buttonmenu.type == 1>
 						                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 						                			<#elseif buttonmenu.type == 2>
@@ -113,20 +122,28 @@
 						</div>
 		            </div>
 		            <#-- table end -->
-		            <div class="box-footer clearfix">
+		            <div class="box-footer clearfix" style="text-align:center">
+		            	<a href="javascript:history.go(-1)" class="btn btn-default">
+		                	<i class="fa fa-undo"></i> 返回
+		                </a>
+            			<button type="submit" class="btn btn-primary">
+							授权
+		                </button>
 		            </div>
 				</div>
 			</div>
 		</div>
 	</section>
+	</form>
 	
 	<#include "layout/modal.ftl" />
 	<script type="text/javascript">
 	$(function(){
+		$('#jstree').jstree('destroy');
 		$('#jstree').jstree({
-			'plugins': ['state'],
+			'plugins': ['checkbox'],
 			'checkbox': {
-				'keep_selected_style': false
+                'keep_selected_style': false//是否默认选中
 			},
 			'core': {
 				'themes': {
@@ -136,19 +153,19 @@
 				}
 			}
 		});
+	    
+	    $('#saveForm').bootstrapValidator({
+		}).on('success.form.bv', function(e){
+			var nodes=$("#jstree").jstree("get_checked");
+			$('input[name=permissions]').val(nodes);
+		
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('bootstrapValidator'); 
+            ajaxSubmit($form, '${ctx}/sys/role/get');
+		});
 	});
 	
-	function gosave(id){
-		var url = '${ctx}/sys/permission/save/go';
-		if (typeof(id) != undefined && !isNaN(id)) {
-			url += '?id=' + id;
-		}
-		location.href = url;
-	}
-	
-	function remove(id){
-		ajaxDelete('${ctx}/sys/permission/delete/'+id, '确认删除ID为 '+id+' 的资源吗？');
-	}
 	</script>
 </body>
 </html>
