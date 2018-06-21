@@ -84,18 +84,31 @@ public class SysRoleController {
 	}
 
 	@RequestMapping("/get")
-	public Object findAll(Model model, Integer page, Integer size, SysRole sysRole) {
+	public Object findAll() {
+		return "sys/role/list";
+	}
+
+	/**
+	 * 分页查询
+	 * 
+	 * @param page
+	 * @param size
+	 * @param sysRole
+	 * @return
+	 */
+	@RequestMapping("/get/page")
+	@ResponseBody
+	public Object findByPage(Integer page, Integer size, SysRole sysRole) {
 		if (page == null) {
 			page = 0;
 		}
 		if (size == null) {
-			size = 20;
+			size = 10;
 		}
 		Pageable pageable = PageRequest.of(page, size);
-		model.addAttribute("page", sysRoleService.findByCondition(pageable, sysRole));
-		return "sys/role/list";
+		return sysRoleService.findByCondition(pageable, sysRole);
 	}
-
+	
 	@ResponseBody
 	public Object getById(@PathVariable Long id) {
 		return sysRoleService.findById(id);

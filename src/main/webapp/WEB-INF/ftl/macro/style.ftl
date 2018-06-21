@@ -77,6 +77,7 @@
 	<#-- 自定义 -->
 	<link href="${ctx}/static/consumer/css/content.css" rel="stylesheet">
 	<script src="${ctx}/static/consumer/sys.js"></script>
+	<script src="${ctx}/static/consumer/page.js"></script>
 	
 	<#-- jquery form ajax -->
 	<script src="${ctx}/static/jquery/js/jquery-form.js"></script>

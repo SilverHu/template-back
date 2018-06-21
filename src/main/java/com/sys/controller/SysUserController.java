@@ -88,16 +88,29 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/get")
-	public Object findAll(Model model, Integer page, Integer size, SysUser sysUser) {
+	public Object page(Model model) {
+		return "sys/user/list";
+	}
+
+	/**
+	 * 分页查询
+	 * 
+	 * @param page
+	 * @param size
+	 * @param sysUser
+	 * @return
+	 */
+	@RequestMapping("/get/page")
+	@ResponseBody
+	public Object findByPage(Integer page, Integer size, SysUser sysUser) {
 		if (page == null) {
 			page = 0;
 		}
 		if (size == null) {
-			size = 20;
+			size = 10;
 		}
 		Pageable pageable = PageRequest.of(page, size);
-		model.addAttribute("page", sysUserService.findByCondition(pageable, sysUser));
-		return "sys/user/list";
+		return sysUserService.findByCondition(pageable, sysUser);
 	}
 
 	@RequestMapping("/save/go")
@@ -129,6 +142,8 @@ public class SysUserController {
 				sysUser.setPermissions(old.getPermissions());
 				if (StringUtils.isBlank(sysUser.getPassword())) {
 					sysUser.setPassword(old.getPassword());
+				} else {
+					sysUser.setPassword(CredentialsMatcher.encrypt(sysUser.getUsername(), sysUser.getPassword()));
 				}
 			}
 		} else {

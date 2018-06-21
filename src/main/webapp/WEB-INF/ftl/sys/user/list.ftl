@@ -23,7 +23,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 		            <div class="box-header with-border">
-		            	<form id="searchForm" class="form-inline" action="" method="post">
+		            	<form id="searchForm" class="form-inline" method="post">
 		            		<table width="100%">
 								<tr>
 									<td>
@@ -48,7 +48,7 @@
 			                            </div>
 			                             -->
 			                            <div class="form-group padding-bottom">
-			                            	<button type="submit" class="btn btn-primary"><i class="fa fa-search-plus"></i>&nbsp;搜索</button>
+			                            	<button type="button" id="searchButton" class="btn btn-primary"><i class="fa fa-search-plus"></i>&nbsp;搜索</button>
 			                            </div>
 									</td>
 									<td align="right">
@@ -61,7 +61,7 @@
 		            	</form>
 		            </div>
 		            
-		            <!-- table start -->
+		            <#-- table start -->
 		            <div class="box-body">
 		            	<table id="contentTable" class="table table-bordered table-hover">
                 			<thead>
@@ -74,38 +74,16 @@
 				                  	<th style="width: 20%">操作</th>
 				                </tr>
                 			</thead>
-		                	<#list page.content as entity>
-			                <tr>
-			                	<td>${entity.id}</td>
-			                  	<td>${entity.username}</td>
-			                  	<td>${entity.email}</td>
-			                  	<td>
-			                  		<#if entity.status == true>
-			                  			启用
-			                  		<#elseif entity.status == false>
-			                  			禁用
-			                  		</#if>
-			                  	</td>
-			                  	<td>
-			                  		<#list entity.roleList as role>
-			                  			role.name 
-			                  		</#list>
-			                  	</td>
-			                  	<td>
-			                  		<a href="${ctx}/sys/user/save/go?id=${entity.id}" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>
-			                  		<a href="javascript:void" onclick="remove(${entity.id})" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>
-			                  		<a href="${ctx}/sys/user/permission/go/${entity.id}" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>
-			                  	</td>
-			                </tr>
-		                	</#list>
+		                	<tbody>
+		                	</tbody>
               			</table>
 		            </div>
-		            <!-- table end -->
+		            <#-- table end -->
 				</div>
 			</div>
 		</div>
 	</section>
-
+ 
 	<script>
 	$(function(){
 		$('[name=status]').select2({
@@ -113,14 +91,38 @@
 			allowClear: true
 		});
 		
-		$('#contentTable').DataTable({
-	      	'paging'      : true,
-	      	'lengthChange': false,
-	      	'searching'   : false,
-	      	'ordering'    : false,
-	      	'info'        : true,
-	      	'autoWidth'   : false
-	    })
+		var _table = $('#contentTable').initAjaxDataTable({
+			url: '${ctx}/sys/user/get/page',
+			form: $('#searchForm'),
+			columns: [
+				{data: 'id'},
+				{data: 'username'},
+				{data: 'email'},
+				{
+					data: 'status',
+					render: function(data, type, row, meta) {
+						if (data == true) {
+							return '启用';
+						} else {
+							return '禁用';
+						}
+	                }
+				},
+				{data : 'roles'},
+				{
+					data: 'id',
+					render: function(data, type, row, meta) {
+						return '<a href="${ctx}/sys/user/save/go?id="' + data +' style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>' +
+	              		'<a href="javascript:void" onclick="remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>' +
+	              		'<a href="${ctx}/sys/user/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>';
+	                }
+				}
+			]
+		});
+		
+		$("#searchButton").click(function(){
+	        _table.draw();
+	    });
 	});
 	
 	function remove(id){

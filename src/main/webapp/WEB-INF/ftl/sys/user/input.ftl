@@ -61,6 +61,24 @@
 		                  	</div>
 		                </div>
 		                <div class="form-group">
+		                  	<label for="rpassword" class="col-sm-2 control-label">确认密码</label>
+		                  	<div class="col-sm-8">
+		                    	<input type="password" name="rpassword" value="" class="form-control" placeholder="确认密码（必填），编辑时不填写则为不修改">
+		                  	</div>
+		                </div>
+		                <div class="form-group">
+		                  	<label for="roles" class="col-sm-2 control-label">角色</label>
+		                  	<div class="col-sm-8">
+		                    	<input type="text" name="roles" value="" class="form-control" placeholder="请选择角色">
+		                  	</div>
+		                </div>
+		                <div class="form-group">
+		                  	<label for="subcompany" class="col-sm-2 control-label">所属部门</label>
+		                  	<div class="col-sm-8">
+		                    	<input type="text" name="subcompany" value="" class="form-control" placeholder="所属部门（必选）">
+		                  	</div>
+		                </div>
+		                <div class="form-group">
 		                  	<label for="status" class="col-sm-2 control-label">用户状态</label>
 		                  	<div class="col-sm-8">
 		                  		<input type="radio" name="status" value="0" <#if operation == "ADD" || entity.status == false>checked</#if>> 禁用

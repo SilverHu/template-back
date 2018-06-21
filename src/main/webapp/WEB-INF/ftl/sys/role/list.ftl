@@ -23,7 +23,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 		            <div class="box-header with-border">
-		            	<form id="searchForm" class="form-inline" action="${ctx}/sys/role/get" method="post">
+		            	<form id="searchForm" class="form-inline" method="post">
 		            		<table width="100%">
 								<tr>
 									<td>
@@ -31,7 +31,7 @@
 			                                <input type="text" name="name" class="form-control" value="${sysRole.name}" placeholder="角色名称">
 			                            </div>
 			                            <div class="form-group padding-bottom">
-			                            	<button type="submit" class="btn btn-primary"><i class="fa fa-search-plus"></i>&nbsp;搜索</button>
+			                            	<button id="searchButton" type="button" class="btn btn-primary"><i class="fa fa-search-plus"></i>&nbsp;搜索</button>
 			                            </div>
 									</td>
 									<td align="right">
@@ -49,8 +49,9 @@
 		            	<table id="contentTable" class="table table-bordered table-hover">
                 			<thead>
                 				<tr>
+				                  	<th style="width: 10%">序号</th>
 				                  	<th style="width: 20%">ID</th>
-				                  	<th style="width: 50%">角色名称</th>
+				                  	<th style="width: 40%">角色名称</th>
 				                  	<th style="width: 30%">操作</th>
 				                </tr>
                 			</thead>
@@ -75,15 +76,34 @@
 	
 	<script>
 	$(function(){
-		$('#contentTable').DataTable({
-	      	'paging'      : true,
-	      	'lengthChange': false,
-	      	'searching'   : false,
-	      	'ordering'    : false,
-	      	'info'        : true,
-	      	'autoWidth'   : false
+		var _table = $('#contentTable').initAjaxDataTable({
+			url: '${ctx}/sys/role/get/page',
+			form: $('#searchForm'),
+			columns: [
+				{
+					data: null,
+					render: function(data, type, row, meta) {
+						return meta.row + 1 + meta.settings._iDisplayStart;;
+	                }
+				},
+				{data: 'id'},
+				{data: 'name'},
+				{
+					data: 'id',
+					render: function(data, type, row, meta) {
+						return '<a href="${ctx}/sys/role/save/go?id="' + data +' style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>' +
+	              		'<a href="javascript:void" onclick="remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>' +
+	              		'<a href="${ctx}/sys/role/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>';
+	                }
+				}
+			]
+		});
+		
+		$("#searchButton").click(function(){
+			console.log($('[name=username]').val());
+			console.log($('[name=status]').val());
+	        _table.draw();
 	    });
-	    
 	});
 	
 	function remove(id){
