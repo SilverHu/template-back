@@ -2,9 +2,6 @@ package com.sys.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import com.sys.entity.SysPermission;
 
 public interface SysPermissionService {
@@ -30,7 +27,7 @@ public interface SysPermissionService {
 	 */
 	public List<SysPermission> findByType(Byte type);
 
-	public Page<SysPermission> findAll(Pageable pageable);
+	public List<SysPermission> findAll();
 
 	/**
 	 * 判断权限标识是否已存在

@@ -21,15 +21,15 @@
 	</appender>
 	
 	<!-- 定义默认输出级别 -->
-	<root level="ERROR">
+	<root level="${logLevel}">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>
 	
 	<!-- logger标签指定打印对应包下的日志 -->
 	<!-- 打开mybatis日志 -->
-	<logger name="com.sys" level="DEBUG" />
-	<logger name="com.test" level="DEBUG" />
-	<logger name="jdbc.sqltiming" level="DEBUG" />
+	<logger name="com.sys" level="${logLevel}" />
+	<logger name="com.test" level="${logLevel}" />
+	<logger name="jdbc.sqltiming" level="${logLevel}" />
 
 </configuration>

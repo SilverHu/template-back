@@ -23,6 +23,7 @@
 		<httpclient.version>4.5</httpclient.version>
 		<slf4j.version>1.7.12</slf4j.version>
 		<logback.version>1.1.3</logback.version>
+		<!-- <jetty.version>9.4.5.v20170502</jetty.version> -->
 		<!-- 显示声明项目编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -133,10 +134,15 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.8.13</version>
+		</dependency> -->
 		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.8.6</version>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.8.13</version>
 		</dependency>
 
 		<!-- shiro -->
@@ -283,6 +289,7 @@
 					<warName>${project.artifactId}</warName>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 
@@ -307,7 +314,9 @@
 				<timeBetweenEvictionRunsMillis>900000</timeBetweenEvictionRunsMillis>
 				<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
 				<!-- 日志文件存放位置 -->
-				<logCatolog>D:/logs/${project.artifactId}.log</logCatolog>
+				<logCatolog>F:/logs/${project.artifactId}.log</logCatolog>
+				<logLevel>DEBUG</logLevel>
+				<!-- freemarker模板刷新时间,单位：秒 -->
 				<template_update_delay>1</template_update_delay>
 				<!-- jpa设置 -->
 				<showSql>true</showSql>

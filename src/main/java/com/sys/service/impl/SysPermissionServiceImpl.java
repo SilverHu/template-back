@@ -3,8 +3,6 @@ package com.sys.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,8 +44,8 @@ public class SysPermissionServiceImpl implements SysPermissionService {
 	}
 
 	@Override
-	public Page<SysPermission> findAll(Pageable pageable) {
-		return sysPermissionDao.findAll(pageable);
+	public List<SysPermission> findAll() {
+		return sysPermissionDao.findAll();
 	}
 
 	@Override
