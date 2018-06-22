@@ -62,6 +62,7 @@
 	        <#-- sidebar menu: : style can be found in sidebar.less -->
 	        <ul class="sidebar-menu" data-widget="tree">
 	        	<#list menus as menu>
+	        		<@shiro.hasPermission name="${menu.permission}"> 
 	        		<li class="treeview">
 		                <a href="javascript:void(0)">
 		                    <i class="fa fa-list"></i>
@@ -70,10 +71,13 @@
 		                </a>
 		                <ul class="treeview-menu">
 		                	<#list menu.subPermissions as submenu>
+		                		<@shiro.hasPermission name="${submenu.permission}">  
 		                		<li><a href="${ctx }/${submenu.link }" target="J_iframe"><i class="fa fa-angle-double-right"></i> ${submenu.name }</a></li>
+					            </@shiro.hasPermission>
 		                	</#list>
 		                </ul>
 		            </li>
+		            </@shiro.hasPermission>
 	        	</#list>
 	        </ul>
 	    </section>

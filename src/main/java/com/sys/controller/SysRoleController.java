@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.sys.entity.SysPermission;
 import com.sys.entity.SysRole;
-import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
 import com.sys.service.SysRoleService;
 import com.util.Constants;
@@ -76,7 +75,7 @@ public class SysRoleController {
 	@RequestMapping("/permission/go/{id}")
 	public Object goGrantPermissions(Model model,@PathVariable Long id){
 		if (id == null) {
-			throw new SysBusinessException("id is null");
+			return new ResponseResult(ResponseCode.ERROR_400, "id is null");
 		}
 		SysRole entity = sysRoleService.findById(id);
 		model.addAttribute("entity", entity);
@@ -85,7 +84,7 @@ public class SysRoleController {
 	}
 
 	@RequestMapping("/get")
-	public Object findAll() {
+	public Object get() {
 		return "sys/role/list";
 	}
 
@@ -147,7 +146,7 @@ public class SysRoleController {
 	@ResponseBody
 	public Object deleteById(@PathVariable Long id) {
 		if (id == null) {
-			throw new SysBusinessException("id is null");
+			return new ResponseResult(ResponseCode.ERROR_400, "id is null");
 		}
 		sysRoleService.deleteById(id);
 		return ResponseResult.success;

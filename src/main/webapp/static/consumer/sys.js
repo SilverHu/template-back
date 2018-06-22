@@ -20,8 +20,10 @@ function ajaxSubmit($form, jumpUrl){
 				$form.bootstrapValidator('disableSubmitButtons', false);  
 			}
 		},
-		error: function(){
-			$form.find('.errorwarning').find('.box-body').html('请检查是否已登录/已登录用户请联系管理员');
+		error: function(XMLHttpRequest, textStatus, errorThrown){
+			var msg = XMLHttpRequest.status + '\t' + textStatus + '\t' + errorThrown + '\n';
+			msg += '请检查是否已登录/已登录用户请联系管理员';
+			$form.find('.errorwarning').find('.box-body').html(msg);
 			$form.find('.errorwarning').show();
 			$form.bootstrapValidator('disableSubmitButtons', false);  
 		}
@@ -47,11 +49,15 @@ function ajaxSubmitReload($form){
 			} else {
 				$form.find('.errorwarning').find('.box-body').html(JSON.stringify(data));
 				$form.find('.errorwarning').show();
+				$form.bootstrapValidator('disableSubmitButtons', false);  
 			}
 		},
-		error: function(){
-			$form.find('.errorwarning').find('.box-body').html('请检查是否已登录');
+		error: function(XMLHttpRequest, textStatus, errorThrown){
+			var msg = XMLHttpRequest.status + '\t' + textStatus + '\t' + errorThrown + '\n';
+			msg += '请检查是否已登录/已登录用户请联系管理员';
+			$form.find('.errorwarning').find('.box-body').html(msg);
 			$form.find('.errorwarning').show();
+			$form.bootstrapValidator('disableSubmitButtons', false);  
 		}
 	});
 }
@@ -72,7 +78,7 @@ function ajaxDelete(url, msg){
 			dataType: 'json',
 			success: function(data){
 				if (data.code == 'SUCCESS') {
-					layer.msg('删除成功', {icon: 1,time: 1000},function(){
+					layer.msg('删除成功', {icon: 1,time: 500},function(){
 						window.location.reload();
 					});
 				} else {

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sys.entity.SysPermission;
-import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
 import com.util.Constants;
 import com.util.ResponseResult;
@@ -24,7 +23,7 @@ public class SysPermissionController {
 	private SysPermissionService sysPermissionService;
 
 	@RequestMapping("/get")
-	public Object findAll(Model model) {
+	public Object get(Model model) {
 		model.addAttribute("list", sysPermissionService.findByParentidIsNull());
 		return "sys/permission/list";
 	}
@@ -77,7 +76,7 @@ public class SysPermissionController {
 	@ResponseBody
 	public Object deleteById(@PathVariable Long id) {
 		if (id == null) {
-			throw new SysBusinessException("id is null");
+			return new ResponseResult(ResponseCode.ERROR_400, "id is null");
 		}
 		sysPermissionService.deleteById(id);
 		return ResponseResult.success;

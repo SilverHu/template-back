@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <#assign ctx="${request.contextPath}" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>权限列表</title>
 	<@style.common ctx=ctx/>
 	<@style.jstree ctx=ctx/>
@@ -47,9 +48,11 @@
 			<div class="col-xs-12">
 				<div class="box">
 		            <div class="box-header with-border" style="text-align:right">
+		            	<@shiro.hasPermission name="permission:save">
 		            	<a class="btn btn-primary" onclick="gosave()">
 		            		<i class="fa fa-plus"></i> 新增资源
 		            	</a>
+		            	</@shiro.hasPermission>
 		            </div>
         
 		            <#-- table start -->
@@ -61,8 +64,12 @@
 							<li class="jstree-open">
 				                <span>
 				                	${menu.name } 
+				                	<@shiro.hasPermission name="permission:save">
 				                	<a onclick="gosave(${menu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
+				                	</@shiro.hasPermission>
+				                	<@shiro.hasPermission name="permission:delete">
 				                	<a onclick="remove(${menu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
+				                	</@shiro.hasPermission>
 				                	<#if menu.type == 1>
 		                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 		                			<#elseif menu.type == 2>
@@ -76,8 +83,12 @@
 			                		<li class="jstree-open">
 			                			<span>
 			                				${submenu.name } 
+			                				<@shiro.hasPermission name="permission:save">
 				                			<a onclick="gosave(${submenu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
+				                			</@shiro.hasPermission>
+				                			<@shiro.hasPermission name="permission:delete">
 				                			<a onclick="remove(${submenu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
+				                			</@shiro.hasPermission>
 				                			<#if submenu.type == 1>
 				                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 				                			<#elseif submenu.type == 2>
@@ -91,8 +102,12 @@
 					                		<li class="jstree-open">
 					                			<span>
 					                				${buttonmenu.name } 
+						                			<@shiro.hasPermission name="permission:save">
 						                			<a onclick="gosave(${buttonmenu.id})" style="padding-left:10px"><i class="fa fa-edit fa-fw"></i></a>
+						                			</@shiro.hasPermission>
+				                					<@shiro.hasPermission name="permission:delete">
 						                			<a onclick="remove(${buttonmenu.id})" style="padding-left:10px"><i class="fa fa-trash-o fa-fw"></i></a>
+						                			</@shiro.hasPermission>
 						                			<#if buttonmenu.type == 1>
 						                				<span class="badge bg-olive" style="margin-left: 10px">菜单</span>
 						                			<#elseif buttonmenu.type == 2>

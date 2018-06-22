@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <#assign ctx="${request.contextPath}" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>角色授权</title>
 	<@style.common ctx=ctx/>
 	<@style.jstree ctx=ctx/>
@@ -156,9 +157,11 @@
 	    
 	    $('#saveForm').bootstrapValidator({
 		}).on('success.form.bv', function(e){
-			var nodes=$("#jstree").jstree("get_checked");
-			$('input[name=permissions]').val(nodes);
-		
+			var checked=$("#jstree").jstree("get_checked"); // 获取选中节点
+			var undetermined=$("#jstree").jstree("get_undetermined"); //获取半选中节点
+			checked = $.merge(checked,undetermined); // 合并节点
+			$('input[name=permissions]').val(checked);
+			
             e.preventDefault();
             var $form = $(e.target);
             var bv = $form.data('bootstrapValidator'); 

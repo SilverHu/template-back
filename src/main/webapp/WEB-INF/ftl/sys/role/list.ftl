@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <#assign ctx="${request.contextPath}" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>角色管理</title>
 	<@style.common ctx=ctx/>
 </head>
@@ -36,7 +37,9 @@
 									</td>
 									<td align="right">
 										<div class="form-group padding-bottom">
+											<@shiro.hasPermission name="role:save">
 											<a class="btn btn-primary" href="${ctx}/sys/role/save/go"><i class="fa fa-user-plus"></i>&nbsp;添加角色</a>
+											</@shiro.hasPermission>
 										</div>
 									</td>
 								</tr>
@@ -82,9 +85,9 @@
 				{
 					data: 'id',
 					render: function(data, type, row, meta) {
-						return '<a href="${ctx}/sys/role/save/go?id=' + data +'" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a>' +
-	              		'<a href="javascript:void" onclick="remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a>' +
-	              		'<a href="${ctx}/sys/role/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a>';
+						return '<@shiro.hasPermission name="role:save"><a href="${ctx}/sys/role/save/go?id=' + data +'" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a></@shiro.hasPermission>' +
+	              		'<@shiro.hasPermission name="role:delete"><a href="javascript:remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a></@shiro.hasPermission>' +
+	              		'<@shiro.hasPermission name="role:permission"><a href="${ctx}/sys/role/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a></@shiro.hasPermission>';
 	                }
 				}
 			]

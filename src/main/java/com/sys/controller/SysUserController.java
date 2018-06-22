@@ -21,7 +21,6 @@ import com.framework.shiro.CredentialsMatcher;
 import com.sys.entity.SysPermission;
 import com.sys.entity.SysRole;
 import com.sys.entity.SysUser;
-import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
 import com.sys.service.SysRoleService;
 import com.sys.service.SysUserService;
@@ -87,7 +86,7 @@ public class SysUserController {
 	@RequestMapping("/permission/go/{id}")
 	public Object goGrantPermissions(Model model, @PathVariable Long id) {
 		if (id == null) {
-			throw new SysBusinessException("id is null");
+			return new ResponseResult(ResponseCode.ERROR_400, "id is null");
 		}
 		SysUser entity = sysUserService.findById(id);
 		model.addAttribute("entity", entity);
@@ -96,7 +95,7 @@ public class SysUserController {
 	}
 
 	@RequestMapping("/get")
-	public Object page(Model model) {
+	public Object get(Model model) {
 		return "sys/user/list";
 	}
 
@@ -182,7 +181,7 @@ public class SysUserController {
 	@ResponseBody
 	public Object deleteById(@PathVariable Long id) {
 		if (id == null) {
-			throw new SysBusinessException("id is null");
+			return new ResponseResult(ResponseCode.ERROR_400, "id is null");
 		}
 		sysUserService.deleteById(id);
 		return ResponseResult.success;

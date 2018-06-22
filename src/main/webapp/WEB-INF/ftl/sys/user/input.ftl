@@ -1,8 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <#assign ctx="${request.contextPath}" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>编辑用户</title>
 	<@style.common ctx=ctx/>
 </head>
@@ -39,7 +40,8 @@
 		                <div class="form-group">
 		                  	<label for="username" class="col-sm-2 control-label">用户名</label>
 		                  	<div class="col-sm-8">
-		                    	<input type="text" name="username" value="${entity.username}" class="form-control" placeholder="User Name（必填）" required>
+		                    	<input type="text" name="username" value="${entity.username}" class="form-control" placeholder="User Name（必填）"
+		                    		<#if operation=="UPDATE">readonly</#if> required>
 		                  	</div>
 		                </div>
 		                <div class="form-group">
