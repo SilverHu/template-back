@@ -60,7 +60,7 @@ public class SysPermissionController {
 	}
 
 	/**
-	 * 判断权限自负是否已存在
+	 * 判断权限标识是否已存在
 	 * 
 	 * @param syspermission
 	 * @return

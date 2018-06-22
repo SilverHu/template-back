@@ -84,4 +84,15 @@ public class SysUserServiceImpl implements SysUserService {
 		}, pageable);
 	}
 
+	@Override
+	public boolean isExists(Long id, String username) {
+		SysUser sysUser = sysUserDao.findByUsername(username);
+		if (sysUser == null || sysUser.getId() == null) {
+			return false;
+		} else if (sysUser.getId().equals(id)) {
+			return false;
+		}
+		return true;
+	}
+
 }

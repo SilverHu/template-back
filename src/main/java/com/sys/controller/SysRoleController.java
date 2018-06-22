@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sys.entity.SysPermission;
 import com.sys.entity.SysRole;
 import com.sys.exception.SysBusinessException;
@@ -150,5 +151,19 @@ public class SysRoleController {
 		}
 		sysRoleService.deleteById(id);
 		return ResponseResult.success;
+	}
+	
+	/**
+	 * 判断角色名称是否已存在
+	 * 
+	 * @param syspermission
+	 * @return
+	 */
+	@RequestMapping("/save/validator")
+	@ResponseBody
+	public Object isValidator(Long id, String name) {
+		JSONObject resp = new JSONObject();
+		resp.put("valid", !sysRoleService.isExists(id, name));
+		return resp;
 	}
 }

@@ -22,4 +22,13 @@ public interface SysUserService {
 	public SysUser findByUsername(String username);
 
 	public Page<SysUser> findByCondition(Pageable pageable, SysUser sysUser);
+	
+	/**
+	 * 判断用户名是否已存在
+	 * 
+	 * @param id
+	 * @param username
+	 * @return
+	 */
+	public boolean isExists(Long id, String username);
 }

@@ -44,6 +44,11 @@ public class SysRoleServiceImpl implements SysRoleService {
 	}
 
 	@Override
+	public List<SysRole> findAll() {
+		return sysRoleDao.findAll();
+	}
+	
+	@Override
 	public Page<SysRole> findByCondition(Pageable pageable, SysRole sysRole) {
 		return sysRoleDao.findAll(new Specification<SysRole>() {
 			private static final long serialVersionUID = 1L;
@@ -61,6 +66,17 @@ public class SysRoleServiceImpl implements SysRoleService {
 				return cb.and(list.toArray(p));
 			}
 		}, pageable);
+	}
+
+	@Override
+	public boolean isExists(Long id, String name) {
+		SysRole sysRole = sysRoleDao.findByName(name);
+		if (sysRole == null || sysRole.getId() == null) {
+			return false;
+		} else if (sysRole.getId().equals(id)) {
+			return false;
+		}
+		return true;
 	}
 
 }

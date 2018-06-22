@@ -108,7 +108,21 @@
 						}
 	                }
 				},
-				{data : 'roles'},
+				{
+					data : 'roles',
+					render: function(data, type, row, meta) {
+						var rolenames = '';
+						if(data != null){
+							for(var i=0;i<data.length;i++){
+								if(i>0){
+									rolenames += ',';
+								}
+								rolenames += data[i].name;
+							}
+						}
+						return rolenames;
+	                }
+				},
 				{
 					data: 'id',
 					render: function(data, type, row, meta) {

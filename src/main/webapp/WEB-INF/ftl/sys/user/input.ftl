@@ -69,7 +69,11 @@
 		                <div class="form-group">
 		                  	<label for="roles" class="col-sm-2 control-label">角色</label>
 		                  	<div class="col-sm-8">
-		                    	<input type="text" name="roles" value="" class="form-control" placeholder="请选择角色">
+		                  		<select name="roleids" multiple="multiple" class="form-control select2" data-placeholder="请选择角色" style="width: 100%;">
+				                  	<#list roles as role>
+				                  		<option value="${role.id}" <#list entity.roles as has><#if has.id==role.id>selected</#if></#list>>${role.name}</option>
+				                  	</#list>
+			                	</select>
 		                  	</div>
 		                </div>
 		                <div class="form-group">
@@ -81,9 +85,9 @@
 		                <div class="form-group">
 		                  	<label for="status" class="col-sm-2 control-label">用户状态</label>
 		                  	<div class="col-sm-8">
-		                  		<input type="radio" name="status" value="0" <#if operation == "ADD" || entity.status == false>checked</#if>> 禁用
+		                  		<input type="radio" name="status" value="false" <#if operation == "ADD" || entity.status?string("true","false") == "false">checked</#if>> 禁用
 		                  		&nbsp;&nbsp;&nbsp;&nbsp;
-		                  		<input type="radio" name="status" value="1" <#if entity.status == true>checked</#if>> 启用
+		                  		<input type="radio" name="status" value="true" <#if entity.status?string("true","false") == "true">checked</#if>> 启用
 		                  	</div>
 		                </div>
 		                <@layout.errorwarning/>
@@ -113,7 +117,24 @@
 			radioClass   : 'iradio_flat-green'
 		});
 		
+		$('.select2').select2();
+		
 		$('#saveForm').bootstrapValidator({
+			fields: {
+				username: {
+					trigger: 'blur',
+					validators:{
+						remote: {
+							url: '${ctx}/sys/user/save/validator',
+							data:{
+								id: function(){return $('input[name=id]').val();},
+								username: function(){return $('input[name=username]').val()}
+							},
+							message: '该角色名称已存在'
+						}
+					}
+				}
+			}
 		}).on('success.form.bv', function(e){
             e.preventDefault();
             var $form = $(e.target);

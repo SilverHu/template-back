@@ -3,6 +3,8 @@ package com.sys.controller;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.framework.shiro.CredentialsMatcher;
 import com.sys.entity.SysPermission;
+import com.sys.entity.SysRole;
 import com.sys.entity.SysUser;
 import com.sys.exception.SysBusinessException;
 import com.sys.service.SysPermissionService;
+import com.sys.service.SysRoleService;
 import com.sys.service.SysUserService;
 import com.util.Constants;
 import com.util.ResponseResult;
@@ -34,6 +39,9 @@ public class SysUserController {
 
 	@Autowired
 	private SysPermissionService sysPermissionService;
+
+	@Autowired
+	private SysRoleService sysRoleService;
 
 	/**
 	 * 用户授权
@@ -121,12 +129,13 @@ public class SysUserController {
 			model.addAttribute(Constants.OPERATION, SaveOperation.UPDATE);
 			model.addAttribute("entity", sysUserService.findById(id));
 		}
+		model.addAttribute("roles", sysRoleService.findAll());
 		return "sys/user/input";
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
-	public Object save(SysUser sysUser) {
+	public Object save(HttpServletRequest request, SysUser sysUser) {
 		if (sysUser == null || StringUtils.isBlank(sysUser.getUsername())) {
 			return new ResponseResult(ResponseCode.ERROR_400, "用户名不能为空");
 		}
@@ -151,6 +160,20 @@ public class SysUserController {
 			sysUser.setPassword(CredentialsMatcher.encrypt(sysUser.getUsername(), sysUser.getPassword()));
 		}
 
+		// 处理角色
+		String[] roleids = request.getParameterValues("roleids");
+		if (roleids != null) {
+			Set<SysRole> roles = new LinkedHashSet<>();
+			for (String roleid : roleids) {
+				if (NumberUtils.isDigits(roleid)) {
+					SysRole sysRole = new SysRole();
+					sysRole.setId(Long.valueOf(roleid));
+					roles.add(sysRole);
+				}
+			}
+			sysUser.setRoles(roles);
+		}
+
 		sysUserService.save(sysUser);
 		return ResponseResult.success;
 	}
@@ -165,4 +188,17 @@ public class SysUserController {
 		return ResponseResult.success;
 	}
 
+	/**
+	 * 判断用户名是否已存在
+	 * 
+	 * @param syspermission
+	 * @return
+	 */
+	@RequestMapping("/save/validator")
+	@ResponseBody
+	public Object isValidator(Long id, String username) {
+		JSONObject resp = new JSONObject();
+		resp.put("valid", !sysUserService.isExists(id, username));
+		return resp;
+	}
 }

@@ -76,6 +76,21 @@
 		});
 		
 		$('#saveForm').bootstrapValidator({
+			fields: {
+				name: {
+					trigger: 'blur',
+					validators:{
+						remote: {
+							url: '${ctx}/sys/role/save/validator',
+							data:{
+								id: function(){return $('input[name=id]').val();},
+								name: function(){return $('input[name=name]').val()}
+							},
+							message: '该角色名称已存在'
+						}
+					}
+				}
+			}
 		}).on('success.form.bv', function(e){
             e.preventDefault(); // Prevent form submission
             var $form = $(e.target); // Get the form instance
