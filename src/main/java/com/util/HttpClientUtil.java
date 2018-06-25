@@ -1,5 +1,6 @@
 package com.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -18,6 +19,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -118,7 +120,7 @@ public class HttpClientUtil {
 
 		return executeHttpRequest(httpClient, httpPost);
 	}
-	
+
 	/**
 	 * 发送Post请求：上传单个文件
 	 * 
@@ -132,16 +134,33 @@ public class HttpClientUtil {
 	 *            文件类型，为空则默认，图片类型"image/jpeg"
 	 * @return
 	 */
-	public static String sendHttpPostFile(String url, String inputname, File file,String fileType) {
+	public static String sendHttpPostFile(String url, String inputname, File file, String fileType) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(inputname, file);
-		
+
 		Map<String, String> fileTypes = new HashMap<String, String>();
 		fileTypes.put(inputname, fileType);
-		
+
 		// 发送请求
 		return sendHttpPostFile(url, params, fileTypes);
 
+	}
+
+	/**
+	 * post binary请求
+	 * @param url
+	 * @param bytes
+	 * @return
+	 */
+	public static byte[] sendHttpPostBinary(String url, byte[] bytes) {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(url);
+
+		// 对二进制文件填充
+		InputStreamEntity entity = new InputStreamEntity(new ByteArrayInputStream(bytes));
+		entity.setContentType("binary/octet-stream");
+		httpPost.setEntity(entity);
+		return executeHttpBinaryRequest(httpClient, httpPost);
 	}
 
 	/**
@@ -315,5 +334,47 @@ public class HttpClientUtil {
 		logger.debug(httpRequest.getURI() + "：response=" + responseContent);
 		return responseContent;
 	}
+	
+	/**
+	 * 执行http请求
+	 * 
+	 * @param httpClient
+	 *            http客户端
+	 * @param http
+	 *            http请求
+	 * @return
+	 */
+	public static byte[] executeHttpBinaryRequest(CloseableHttpClient httpClient, HttpRequestBase httpRequest) {
+		CloseableHttpResponse response = null;
+		byte[] responseContent = null;
+		try {
+			response = httpClient.execute(httpRequest);
+			HttpEntity entity = response.getEntity();
+
+			if (null != entity) {
+				responseContent = EntityUtils.toByteArray(entity);
+				EntityUtils.consume(entity); // 关闭content stream
+			}
+
+			response.close();
+		} catch (ClientProtocolException e) {
+			logger.error("该异常通常是协议错误导致,比如构造HttpGet对象时传入的协议不对(将'http'写成'htp')或者服务器端返回的内容不符合HTTP协议要求等,堆栈信息如下" + e);
+		} catch (IOException e) {
+			logger.error("该异常通常是网络原因引起的,如HTTP服务器未启动等,堆栈信息如下" + e);
+		} finally {
+			try {
+				if (response != null) {
+					response.close();
+				}
+				httpClient.close();
+			} catch (IOException e) {
+				logger.debug("HttpClient关闭异常" + e);
+			}
+		}
+
+		logger.debug(httpRequest.getURI() + "：response=" + new String(responseContent));
+		return responseContent;
+	}
+
 
 }

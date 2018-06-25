@@ -79,7 +79,7 @@ public class FileUtils {
 	 * @param subImageBounds
 	 * @param destImageFile
 	 * @throws IOException
-	 * @author huchuanyin
+	 * @author SilverHu
 	 */
 	private static void saveSubImage(BufferedImage image, Rectangle subImageBounds, File newImg) throws IOException {
 		if (!newImg.exists()) {
@@ -119,7 +119,7 @@ public class FileUtils {
 	 * @param height
 	 *            预处理后图片高度
 	 * @return
-	 * @author huchuanyin
+	 * @author SilverHu
 	 * @throws IOException
 	 */
 	private static BufferedImage makeThumbnail(Image img, int width, int height) throws IOException {
