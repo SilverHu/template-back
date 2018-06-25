@@ -34,7 +34,8 @@
 					}
 				});
 			},
-			columns : opts.columns
+			columns: opts.columns,
+			createdRow: opts.createdRow
 		}));
 		return _table;
 	}
@@ -46,6 +47,7 @@
 			return $form; // ajax请求表单
 		},
 		columns : [], // 请求完成后的column填充
+		createdRow: null, // 创建行后的回调
 		Data_Table_Options : { // DataTables初始化选项
 			autoWidth : false, // 禁用自动调整列宽
 			stripeClasses : [ 'odd', 'even' ], // 为奇偶行加上样式，兼容不支持CSS伪类的场合

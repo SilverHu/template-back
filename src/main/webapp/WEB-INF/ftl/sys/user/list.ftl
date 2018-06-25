@@ -131,10 +131,13 @@
 					render: function(data, type, row, meta) {
 						return '<@shiro.hasPermission name="user:save"><a href="${ctx}/sys/user/save/go?id=' + data +'" style="padding-right:10px"><i class="fa fa-edit fa-fw fa-lg"></i></a></@shiro.hasPermission>' +
 	              		'<@shiro.hasPermission name="user:delete"><a href="javascript:remove(' + data +')" style="padding-right:10px"><i class="fa fa-trash-o fa-fw fa-lg"></i></a></@shiro.hasPermission>' +
-	              		'<@shiro.hasPermission name="user:permission"><a href="${ctx}/sys/user/permission/go/' + data +'" style="padding-right:10px"><i class="fa fa-gear fa-fw fa-lg"></i></a></@shiro.hasPermission>';
+	              		'<@shiro.hasPermission name="user:permission"><a href="${ctx}/sys/user/permission/go/' + data +'" style="padding-right:10px" data-toggle="tooltip" data-placement="right" title="授权"><i class="fa fa-gear fa-fw fa-lg"></i></a></@shiro.hasPermission>';
 	                }
 				}
-			]
+			],
+			createdRow: function(row, data, dataIndex){
+				$(row).find('[data-toggle=tooltip]').tooltip();
+			}
 		});
 		
 		$("#searchButton").click(function(){
