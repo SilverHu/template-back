@@ -4,6 +4,9 @@
 	    	<span class="logo-lg">${name}</span>
 	    </a>
 	    <nav class="navbar navbar-static-top" role="navigation">
+	    	<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+	        	<span class="sr-only">Toggle navigation</span>
+	      	</a>
 	        <div class="navbar-custom-menu">
 	            <ul class="nav navbar-nav"> 
 	                <li class="dropdown user user-menu">
@@ -65,14 +68,14 @@
 	        		<@shiro.hasPermission name="${menu.permission}"> 
 	        		<li class="treeview">
 		                <a href="javascript:void(0)">
-		                    <i class="fa fa-list"></i>
+		                    <i class="fa <#if menu.icon??>${menu.icon}<#else>fa-list</#if>"></i>
 		                    <span>${menu.name }</span>
 		                    <i class="fa fa-angle-left pull-right"></i>
 		                </a>
 		                <ul class="treeview-menu">
 		                	<#list menu.subPermissions as submenu>
 		                		<@shiro.hasPermission name="${submenu.permission}">  
-		                		<li><a href="${ctx }/${submenu.link }" target="J_iframe"><i class="fa fa-angle-double-right"></i> ${submenu.name }</a></li>
+		                		<li><a href="${ctx }/${submenu.link }" target="J_iframe"><i class="fa <#if submenu.icon??>${submenu.icon}<#else>fa-angle-double-right</#if>"></i> ${submenu.name }</a></li>
 					            </@shiro.hasPermission>
 		                	</#list>
 		                </ul>

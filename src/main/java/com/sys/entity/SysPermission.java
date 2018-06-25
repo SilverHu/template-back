@@ -27,6 +27,7 @@ public class SysPermission {
 	private String description;// 资源描述
 	private Byte type;// 资源类型 1-菜单 2-按钮
 	private Integer weight; // 权重
+	private String icon; // icon图标，格式为fa fa-xx
 	@OneToMany(mappedBy = "parentid", fetch = FetchType.EAGER)
 	@OrderBy("weight desc")
 	private List<SysPermission> subPermissions; // 子菜单
@@ -101,6 +102,24 @@ public class SysPermission {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+
+	/**
+	 * icon图标，格式为fa fa-xx
+	 * 
+	 * @return
+	 */
+	public String getIcon() {
+		return icon;
+	}
+
+	/**
+	 * icon图标，格式为fa fa-xx
+	 * 
+	 * @param icon
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 	public List<SysPermission> getSubPermissions() {

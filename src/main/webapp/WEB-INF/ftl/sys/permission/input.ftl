@@ -99,6 +99,12 @@
 		                  	</div>
 		                </div>
 		                <div class="form-group">
+		                  	<label for="icon" class="col-sm-2 control-label">图标</label>
+		                  	<div class="col-sm-8">
+		                    	<input type="text" name="icon" class="form-control" placeholder="图标，格式：fa-xx">
+		                  	</div>
+		                </div>
+		                <div class="form-group">
 		                  	<label for="weight" class="col-sm-2 control-label">权重</label>
 		                  	<div class="col-sm-8">
 		                    	<input type="text" name="weight" class="form-control" placeholder="权重">
