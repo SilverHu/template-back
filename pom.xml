@@ -303,7 +303,7 @@
 			</activation>
 			<properties>
 				<jdbc.driver>org.gjt.mm.mysql.Driver</jdbc.driver>
-				<jdbc.url>jdbc:mysql://localhost:3306/templete</jdbc.url>
+				<jdbc.url>jdbc:mysql://localhost:3306/template</jdbc.url>
 				<connectionProperties>useUnicode=true;characterEncoding=UTF-8</connectionProperties>
 				<jdbc.username>root</jdbc.username>
 				<jdbc.password>123456</jdbc.password>
