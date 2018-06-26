@@ -12,7 +12,7 @@ import java.util.Date;
  * @author SilverHu
  *
  */
-public class DateUtils {
+public class DateUtil {
 	public static String yMdHms = "yyyy-MM-dd HH:mm:ss";
 	public static String yMd = "yyyy-MM-dd";
 
@@ -78,7 +78,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String format(Long date, String format) {
-		return DateUtils.format(DateUtils.parse(date),format);
+		return DateUtil.format(DateUtil.parse(date),format);
 	}
 
 	/**
